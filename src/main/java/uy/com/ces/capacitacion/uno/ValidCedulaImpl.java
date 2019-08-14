@@ -90,9 +90,9 @@ public class ValidCedulaImpl implements ValidCedula {
 	}
 
 	/**
-	 * @param value  valor que debe encontrarse en la posición del dígito
-	 *               verificador.
-	 * @param str cadena con los números de una cédula
+	 * @param value valor que debe encontrarse en la posición del dígito
+	 *              verificador.
+	 * @param str   cadena con los números de una cédula
 	 * @return retorna true si value coincide con el ultimo carácter de la cadena.
 	 */
 	public boolean checkValidatonDigit(Integer value, String str) {
