@@ -28,11 +28,13 @@ class Carrito implements ICarrito {
 	}
 
 	public void agregarProducto(Producto p, int cant) {
-		Item i = this.obtenerItem(p.getNombre());
-		if (i != null) {
-			i.setCantidad(i.getCantidad() + cant);
-		} else {
-			items.add(new Item(p, cant));
+		if (cant > 0) {
+			Item i = this.obtenerItem(p.getNombre());
+			if (i != null) {
+				i.setCantidad(i.getCantidad() + cant);
+			} else {
+				items.add(new Item(p, cant));
+			}	
 		}
 	}
 
@@ -66,7 +68,7 @@ class Carrito implements ICarrito {
 		if (i != null) {
 			return i.getCantidad();
 		} else {
-			return -1;
+			return 0;
 		}
 	}
 
