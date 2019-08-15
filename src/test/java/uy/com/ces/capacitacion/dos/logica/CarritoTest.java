@@ -2,35 +2,20 @@ package uy.com.ces.capacitacion.dos.logica;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class CarritoTest {
 
+	public static final String PROD_PAPA = "PAPA";
+	public static final String PROD_LECHUGA = "LECHUGA";
+	
 	ICarrito carrito;
-	ICarrito carrito2;
-	Producto papa;
-	Producto lechuga;
-
-	public CarritoTest() {
-	}
-
-	@BeforeAll
-	public static void setUpClass() throws Exception {
-	}
-
-	@AfterAll
-	public static void tearDownClass() throws Exception {
-	}
 
 	@BeforeEach
 	public void setUp() {
 		carrito = FactoryCarrito.getCarrito();
-		papa = new Producto(25, "papa");
-		lechuga = new Producto(10, "lechuga");
 	}
 
 	@AfterEach
@@ -41,21 +26,34 @@ public class CarritoTest {
 	@Test
 	public void testAgregarProductoExistente() {
 
+		Producto papa = factoryProducto(25, PROD_PAPA);
+		
 		carrito.agregarProducto(papa, 20);
-		assertEquals(20, carrito.obtenerCantidad("papa"));
+		assertEquals(20, carrito.obtenerCantidad(PROD_PAPA));
 
 		carrito.agregarProducto(papa, 2);
-		// deberén haber 22 papas
-		assertEquals(22, carrito.obtenerCantidad("papa"));
-
+		assertEquals(22, carrito.obtenerCantidad(PROD_PAPA));
 	}
 
 	@Test
 	public void testProbarTotal() {
+		int cantPapa = 1;
+		int cantLechuga = 1;
+		
+		long precioPapa = 25;
+		long precioLechuga = 10;
 
-		carrito.agregarProducto(papa, 1);
-		carrito.agregarProducto(lechuga, 1);
+		long resultado = (cantPapa * precioPapa) + (cantLechuga * precioLechuga);
 
-		assertEquals(25 + 10, (long) carrito.obtenerPrecioTotal());
+		carrito.agregarProducto(factoryProducto(precioPapa, PROD_PAPA), cantPapa);
+		carrito.agregarProducto(factoryProducto(precioLechuga, PROD_LECHUGA), cantLechuga);
+
+		assertEquals(resultado, (long) carrito.obtenerPrecioTotal());
+	}
+	
+	
+	private Producto factoryProducto(double precio, String nombre)
+	{
+		return new Producto(precio, nombre);
 	}
 }
