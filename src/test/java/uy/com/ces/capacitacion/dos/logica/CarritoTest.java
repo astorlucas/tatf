@@ -10,7 +10,7 @@ public class CarritoTest {
 
 	public static final String PROD_PAPA = "PAPA";
 	public static final String PROD_LECHUGA = "LECHUGA";
-	
+
 	ICarrito carrito;
 
 	@BeforeEach
@@ -25,21 +25,25 @@ public class CarritoTest {
 
 	@Test
 	public void testAgregarProductoExistente() {
+		long precio = 25;
 
-		Producto papa = factoryProducto(25, PROD_PAPA);
-		
-		carrito.agregarProducto(papa, 20);
-		assertEquals(20, carrito.obtenerCantidad(PROD_PAPA));
+		int cantInicial = 20;
+		int cantPosterior = 2;
 
-		carrito.agregarProducto(papa, 2);
-		assertEquals(22, carrito.obtenerCantidad(PROD_PAPA));
+		Producto papa = factoryProducto(precio, PROD_PAPA);
+
+		carrito.agregarProducto(papa, cantInicial);
+		assertEquals(cantInicial, carrito.obtenerCantidad(PROD_PAPA));
+
+		carrito.agregarProducto(papa, cantPosterior);
+		assertEquals(cantInicial + cantPosterior, carrito.obtenerCantidad(PROD_PAPA));
 	}
 
 	@Test
 	public void testProbarTotal() {
 		int cantPapa = 1;
 		int cantLechuga = 1;
-		
+
 		long precioPapa = 25;
 		long precioLechuga = 10;
 
@@ -50,10 +54,8 @@ public class CarritoTest {
 
 		assertEquals(resultado, (long) carrito.obtenerPrecioTotal());
 	}
-	
-	
-	private Producto factoryProducto(double precio, String nombre)
-	{
+
+	private Producto factoryProducto(double precio, String nombre) {
 		return new Producto(precio, nombre);
 	}
 }
