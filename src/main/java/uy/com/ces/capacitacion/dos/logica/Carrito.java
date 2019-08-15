@@ -48,8 +48,9 @@ class Carrito implements ICarrito {
 
 	public double obtenerPrecioTotal() {
 		double precioTotal = 0;
-		for (Item item : items)
-			precioTotal = item.getProducto().getPrecio();
+		for (Item item : items) {
+			precioTotal += item.getProducto().getPrecio() * item.getCantidad();
+		}
 
 		return precioTotal;
 	}
