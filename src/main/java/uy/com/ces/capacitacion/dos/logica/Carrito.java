@@ -30,7 +30,7 @@ class Carrito implements ICarrito {
 	public void agregarProducto(Producto p, int cant) {
 		Item i = this.obtenerItem(p.getNombre());
 		if (i != null) {
-			i.setCantidad(i.getCantidad());
+			i.setCantidad(i.getCantidad() + cant);
 		} else {
 			items.add(new Item(p, cant));
 		}
