@@ -11,7 +11,6 @@ import java.util.stream.Stream;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -97,7 +96,6 @@ class ValidCedulaImplTest {
 	 * Test method for
 	 * {@link uy.com.ces.capacitacion.uno.ValidCedulaImpl#valid(java.lang.String)}.
 	 */
-	@Tag("dev")
 	@Test
 	public final void testValidNull() {
 		assertFalse(validator.valid(null));
