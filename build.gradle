@@ -29,12 +29,32 @@ dependencies {
     implementation 'com.google.guava:guava:27.1-jre'
 
     // Use JUnit test framework
-    // testImplementation 'junit:junit:4.12'
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.5.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.5.1'
     
-    // requerido para usar las anotaciones @ParameterizedTest y @ValueSource
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.5.1'
+    
+	// requerido para usar las anotaciones @ParameterizedTest y @ValueSource 
     testImplementation 'org.junit.jupiter:junit-jupiter-params:5.5.1'
+    
+    // manejador de webdrivers
+    testCompile 'io.github.bonigarcia:webdrivermanager:3.6.2'
+    
+    // selenium
+    testCompile 'org.seleniumhq.selenium:selenium-api:3.141.59'
+    testCompile 'org.seleniumhq.selenium:selenium-java:3.141.59'
+    testCompile 'org.seleniumhq.selenium:selenium-remote-driver:3.141.59'
+    testCompile 'org.seleniumhq.selenium:selenium-chrome-driver:3.141.59'
+    testCompile 'org.seleniumhq.selenium:selenium-firefox-driver:3.141.59'
+    testCompile 'org.seleniumhq.selenium:selenium-ie-driver:3.141.59'
+    testCompile 'org.seleniumhq.selenium:selenium-safari-driver:3.141.59'
+    testCompile 'org.seleniumhq.selenium:selenium-edge-driver:3.141.59'
+    testCompile 'org.seleniumhq.selenium:selenium-opera-driver:3.141.59'
+	// 'com.codeborne:phantomjsdriver:1.4.4'
+    
+    // librería necesaria para loggin de webdriver 
+    testCompile 'org.slf4j:slf4j-simple:1.6.1'
+
+    testCompile 'org.assertj:assertj-core:3.13.2'    
 }
 
 application {

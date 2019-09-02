@@ -9,3 +9,4 @@ build
 bin
 .classpath
 .project
+src/test/resources/credentials.properties
