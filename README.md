@@ -2,14 +2,14 @@
 
 ## Contenido
 
-Cada semana se creará un namespace con el número de semana, donde se implementará la solución a la propuesta de la semana.
+Cada semana se creará un namespace con el número de semana del curso, donde se implementará la solución de las tareas que se soliciten.
 
 ### Construcción y testing
 
 Existe una tarea llamada buildTestReports, que realiza el borrado de la última construcción, construye el sistema, corre las pruebas y los reportes de cobertura.
 
 ```
-	gradle buildTestReports
+gradle buildTestReports
 ```
 
 ### Desarrollo de pruebas
@@ -17,18 +17,24 @@ Existe una tarea llamada buildTestReports, que realiza el borrado de la última c
 Existe una tarea llamada testDev, que ejecuta solo las pruebas etiquetadas con la palabra test.
 
 ```
-	@Tag("dev")
-	@Test
-	public final void test() {
-		....
-	}
+@Tag("dev")
+@Test
+public final void test() {
+	....
+}
 ```
 
-El objetivo de esta tarea es poder ejecutar rápidamente solo las pruebas que se están desarrollando. 
+El objetivo de esta tarea es poder ejecutar solo las pruebas que se están desarrollando. 
 
 ```
-	gradle testDev
+gradle testDev
 ```
+
+### Acceso a servicios
+
+Las pruebas que requieren acceso a servicios, necesitan recibir desde configuración, las credenciales necesarias para ingresar a ellos.
+
+Para proporcionar estas credenciales, se debe copiar el archivo /src/test/resources/credentials.example.properties en el mismo directorio, con nombre credentials.properties; y establecer los valores necesarios para ingresar a los servicios.
 
 
 ## GIT
