@@ -6,17 +6,17 @@ public class PageObjectFactoryImpl implements PageObjectFactory {
 
 	@Override
 	public CapacitacionCes factoryCapacitacionCes(DriverManager driverManager) {
-		return new CapacitacionCesImpl(driverManager);
+		return driverManager.factoryElements(new CapacitacionCesImpl(driverManager));
 	}
 
 	@Override
 	public GoogleGmail factoryGoogleGmail(DriverManager driverManager) {
-		return new GoogleGmailImpl(driverManager);
+		return driverManager.factoryElements(new GoogleGmailImpl(driverManager));
 	}
 
 	@Override
 	public GoogleSearch factoryGoogleSearch(DriverManager driverManager) {
-		return new GoogleSearchImpl(driverManager);
+		return driverManager.factoryElements(new GoogleSearchImpl(driverManager));
 	}
 
 }

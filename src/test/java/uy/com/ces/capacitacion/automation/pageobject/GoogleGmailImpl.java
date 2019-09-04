@@ -1,7 +1,7 @@
 package uy.com.ces.capacitacion.automation.pageobject;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -13,25 +13,27 @@ import uy.com.ces.capacitacion.automation.selenium.DriverManager;
 public class GoogleGmailImpl extends GoogleAbstract implements GoogleGmail {
 
 	protected long timeOutGeneral = 30;
+	protected WebDriverWait wdw;
 
-	protected String selBtnGmalApp = "Gmail";
-	protected String selGmailMenuRightTop = "//*[@id=\"gb\"]/div[2]/div[3]/div/div[2]/div/a";
-	protected String selGmailMenuRightTopBtnLogout = "Cerrar sesión";
+	@FindBy(linkText = "Gmail")
+	public WebElement btnGmalApp;
 
-	protected By byBtnGmalApp = By.linkText(selBtnGmalApp);
-	protected By byGmailMenuRightTop = By.xpath(selGmailMenuRightTop);
-	protected By byGmailMenuRightTopBtnLogout = By.partialLinkText(selGmailMenuRightTopBtnLogout);
+	@FindBy(xpath = "//*[@id=\"gb\"]/div[2]/div[3]/div/div[2]/div/a")
+	public WebElement btnGmalMenuRightTop;
+
+	@FindBy(partialLinkText = "Cerrar sesión")
+	public WebElement btnGmailMenuRightTopBtnLogout;
 
 	public GoogleGmailImpl(DriverManager driverManager) {
 		super(driverManager);
+
+		wdw = new WebDriverWait(this.driver, this.timeOutGeneral);
 	}
 
 	@Override
 	public void goGmailApp() {
-		WebDriverWait wdw = new WebDriverWait(driver, timeOutGeneral);
-
-		WebElement btnGmalApp = wdw.until(ExpectedConditions.elementToBeClickable(byBtnGmalApp));
-		btnGmalApp.click();
+		this.btnGmalApp = wdw.until(ExpectedConditions.elementToBeClickable(this.btnGmalApp));
+		this.btnGmalApp.click();
 	}
 
 	@Override
@@ -41,12 +43,11 @@ public class GoogleGmailImpl extends GoogleAbstract implements GoogleGmail {
 
 	@Override
 	public void logout() {
-		WebDriverWait wdw = new WebDriverWait(driver, timeOutGeneral);
+		
+		this.btnGmalMenuRightTop = wdw.until(ExpectedConditions.elementToBeClickable(this.btnGmalMenuRightTop));
+		
+		this.btnGmalMenuRightTop.click();
 
-		WebElement btnGmalMenuRightTop = wdw.until(ExpectedConditions.elementToBeClickable(byGmailMenuRightTop));
-		btnGmalMenuRightTop.click();
-
-		WebElement btnGmailMenuRightTopBtnLogout = driver.findElement(byGmailMenuRightTopBtnLogout);
-		btnGmailMenuRightTopBtnLogout.click();
+		this.btnGmailMenuRightTopBtnLogout.click();
 	}
 }

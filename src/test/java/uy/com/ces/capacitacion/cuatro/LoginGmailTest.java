@@ -3,6 +3,7 @@ package uy.com.ces.capacitacion.cuatro;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import uy.com.ces.capacitacion.automation.ConfigInject;
@@ -27,23 +28,24 @@ public class LoginGmailTest extends DriverManagerAbstract {
 	@BeforeEach
 	@DependencyInject({ PageObjectFactoryImpl.class })
 	public void setUp(PageObjectFactory pageObjectFactory) {
-		gm = pageObjectFactory.factoryGoogleGmail(driverManager);
+		this.gm = pageObjectFactory.factoryGoogleGmail(driverManager);
 	}
 
+	@Tag("dev")
 	@Test
 	public void testLoginGmail(@ConfigInject("pagina.google.home.page") String homepage,
 			@ConfigInject("pagina.google.user.name") String userName,
 			@ConfigInject("pagina.google.user.pass") String userPass) {
 
-		gm.goHome(homepage);
+		this.gm.goHome(homepage);
 
-		gm.login(userName, userPass);
+		this.gm.login(userName, userPass);
 
-		gm.goGmailApp();
+		this.gm.goGmailApp();
 
-		String currentTitle = gm.getTitle();
+		String currentTitle = this.gm.getTitle();
 
-		gm.logout();
+		this.gm.logout();
 
 		/**
 		 * Recibidos - user@gmail.com - Gmail Recibidos (1) - user@gmail.com - Gmail

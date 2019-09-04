@@ -2,12 +2,12 @@ package uy.com.ces.capacitacion.automation.pageobject;
 
 import java.time.Duration;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
@@ -23,17 +23,24 @@ public abstract class GoogleAbstract {
 
 	protected long timeOut = 30;
 	protected long pollingEvery = 5;
+	protected Wait<WebDriver> fw;
 
-	protected String selBtnLogin = "gb_70";
-	protected String selInputUserName = "identifierId";
-	protected String selInputUserCredential = "password";
+	@FindBy(id = "gb_70")
+	public WebElement btnLogin;
 
-	protected By byInputUserName = By.id(selInputUserName);
-	protected By byInputUserCredential = By.id(selInputUserCredential);
-	protected By byBtnLogin = By.id(selBtnLogin);
+	@FindBy(id = "identifierId")
+	public WebElement inputUserName;
+
+	@FindBy(id = "password")
+	public WebElement inputPassword;
 
 	public GoogleAbstract(DriverManager driverManager) {
 		this.driver = driverManager.factoryDriver();
+
+		this.fw = new FluentWait<>(driver)
+				.withTimeout(Duration.ofSeconds(timeOut))
+				.pollingEvery(Duration.ofSeconds(pollingEvery))
+				.ignoring(NoSuchElementException.class);
 	}
 
 	public void goHome(String homepage) {
@@ -41,23 +48,21 @@ public abstract class GoogleAbstract {
 	}
 
 	public void login(String userName, String userPass) {
-		WebElement btnLogin = driver.findElement(byBtnLogin);
-		btnLogin.click();
 
-		Wait<WebDriver> fw = new FluentWait<>(driver).withTimeout(Duration.ofSeconds(timeOut))
-				.pollingEvery(Duration.ofSeconds(pollingEvery)).ignoring(NoSuchElementException.class);
+		this.btnLogin.click();
 
-		WebElement inputUserName = fw.until(ExpectedConditions.elementToBeClickable(byInputUserName));
+		this.inputUserName = this.fw.until(ExpectedConditions.elementToBeClickable(this.inputUserName));
 
-		Actions actionUser = new Actions(driver);
-		actionUser.moveToElement(inputUserName);
+		Actions actionUser = new Actions(this.driver);
+		actionUser.moveToElement(this.inputUserName);
 		actionUser.sendKeys(userName);
 		actionUser.sendKeys(Keys.RETURN);
 		actionUser.build().perform();
 
-		WebElement inputPassword = fw.until(ExpectedConditions.elementToBeClickable(byInputUserCredential));
-		Actions actionPass = new Actions(driver);
-		actionPass.moveToElement(inputPassword);
+		this.inputPassword = this.fw.until(ExpectedConditions.elementToBeClickable(this.inputPassword));
+		
+		Actions actionPass = new Actions(this.driver);
+		actionPass.moveToElement(this.inputPassword);
 		actionPass.sendKeys(userPass);
 		actionPass.sendKeys(Keys.RETURN);
 		actionPass.build().perform();

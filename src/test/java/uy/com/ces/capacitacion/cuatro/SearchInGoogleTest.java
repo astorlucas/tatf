@@ -3,6 +3,7 @@ package uy.com.ces.capacitacion.cuatro;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import uy.com.ces.capacitacion.automation.ConfigInject;
@@ -27,18 +28,19 @@ public class SearchInGoogleTest extends DriverManagerAbstract {
 	@BeforeEach
 	@DependencyInject({ PageObjectFactoryImpl.class })
 	public void setUp(PageObjectFactory pageObjectFactory) {
-		gs = pageObjectFactory.factoryGoogleSearch(driverManager);
+		this.gs = pageObjectFactory.factoryGoogleSearch(driverManager);
 	}
 
+	@Tag("dev")
 	@Test
 	public void testSearchTextGoogle(@ConfigInject("pagina.google.home.page") String homepage,
 			@ConfigInject("pagina.google.buscar.texto") String text) {
 
-		gs.goHome(homepage);
+		this.gs.goHome(homepage);
 
-		gs.searcHome(text);
+		this.gs.searcHome(text);
 
-		String currentTitle = gs.getTitle();
+		String currentTitle = this.gs.getTitle();
 		String spectedTitle = text.concat(" - Buscar con Google");
 
 		assertThat(currentTitle).isEqualTo(spectedTitle);

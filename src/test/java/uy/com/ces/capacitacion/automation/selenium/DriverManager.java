@@ -22,4 +22,11 @@ public interface DriverManager {
 	 * Cierra la instancia de WebDriver iniciada al llamar el método factoryDriver
 	 */
 	void destroyDriver();
+	
+	/**
+	 * @param <T>
+	 * @param o Objeto con atributos decorados con FindBy
+	 * @return El objeto recibido
+	 */
+	<T extends Object> T factoryElements(T o);
 }

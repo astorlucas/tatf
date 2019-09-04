@@ -3,6 +3,7 @@ package uy.com.ces.capacitacion.cuatro;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import uy.com.ces.capacitacion.automation.ConfigInject;
@@ -27,9 +28,10 @@ public class SearchInCapacitacionCes extends DriverManagerAbstract {
 	@BeforeEach
 	@DependencyInject({ PageObjectFactoryImpl.class })
 	public void setUp(PageObjectFactory pageObjectFactory) {
-		cc = pageObjectFactory.factoryCapacitacionCes(driverManager);
+		this.cc = pageObjectFactory.factoryCapacitacionCes(driverManager);
 	}
 
+	@Tag("dev")
 	@Test
 	public void testSearchPostCes(@ConfigInject("pagina.ces.home.page") String homepage,
 			@ConfigInject("pagina.ces.user.name") String userName,
@@ -37,17 +39,17 @@ public class SearchInCapacitacionCes extends DriverManagerAbstract {
 			@ConfigInject("pagina.ces.link.curso") String textLinkCourse,
 			@ConfigInject("pagina.ces.buscar.texto") String textSearch) {
 
-		cc.goHome(homepage);
+		this.cc.goHome(homepage);
 
-		cc.login(userName, userPass);
+		this.cc.login(userName, userPass);
 
-		cc.accessACourse(textLinkCourse);
+		this.cc.accessACourse(textLinkCourse);
 
-		cc.searchOnCoursePage(textSearch);
+		this.cc.searchOnCoursePage(textSearch);
 
-		String textOnCoursePage = cc.getArticleTextOnCoursePage();
+		String textOnCoursePage = this.cc.getArticleTextOnCoursePage();
 
-		cc.logout();
+		this.cc.logout();
 
 		assertThat(textOnCoursePage).containsIgnoringCase(textSearch);
 	}

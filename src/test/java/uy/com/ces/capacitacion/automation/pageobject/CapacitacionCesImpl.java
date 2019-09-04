@@ -2,6 +2,7 @@ package uy.com.ces.capacitacion.automation.pageobject;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 import uy.com.ces.capacitacion.automation.selenium.DriverManager;
 
@@ -10,14 +11,14 @@ import uy.com.ces.capacitacion.automation.selenium.DriverManager;
  */
 public class CapacitacionCesImpl extends CapacitacionAbstract implements CapacitacionCes {
 
-	protected String selBtnSearch = "searchform_button";
-	protected String selInputSearch = "searchform_search";
-	protected String selTextOnCoursePage = "maincontent";
+	@FindBy(id = "searchform_search")
+	protected WebElement inputSearch;
+	
+	@FindBy(id = "searchform_button")
+	protected WebElement btnSearch;
 
-	protected By byBtnSearch = By.id(selBtnSearch);
-	protected By byInputSearch = By.id(selInputSearch);
-
-	protected By byTextOnCoursePage = By.className(selTextOnCoursePage);
+	@FindBy(className = "maincontent")
+	protected WebElement textContainer;
 
 	public CapacitacionCesImpl(DriverManager driverManager) {
 		super(driverManager);
@@ -36,21 +37,16 @@ public class CapacitacionCesImpl extends CapacitacionAbstract implements Capacit
 	@Override
 	public void searchOnCoursePage(String textSearch) {
 
-		WebElement inputSearch = driver.findElement(byInputSearch);
-		inputSearch.click();
-		inputSearch.clear();
-		inputSearch.sendKeys(textSearch);
+		this.inputSearch.click();
+		this.inputSearch.clear();
+		this.inputSearch.sendKeys(textSearch);
 
-		WebElement btnSearch = driver.findElement(byBtnSearch);
-		btnSearch.click();
+		this.btnSearch.click();
 	}
 
 	@Override
 	public String getArticleTextOnCoursePage() {
-
-		WebElement textContainer = driver.findElement(byTextOnCoursePage);
-
-		return textContainer.getText();
+		return this.textContainer.getText();
 	}
 
 }

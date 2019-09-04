@@ -8,6 +8,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 // import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.opera.OperaDriver;
+import org.openqa.selenium.support.PageFactory;
 
 import io.github.bonigarcia.wdm.DriverManagerType;
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -48,8 +49,7 @@ public class DriverManagerImpl implements DriverManager {
 			break;
 		case PHANTOMJS:
 			/**
-			 * this.driver = new PhantomJSDriver();
-			 * break;
+			 * this.driver = new PhantomJSDriver(); break;
 			 */
 		case SELENIUM_SERVER_STANDALONE:
 		default:
@@ -57,6 +57,13 @@ public class DriverManagerImpl implements DriverManager {
 		}
 
 		return this.driver;
+	}
+
+	@Override
+	public <T> T factoryElements(T o) {
+		PageFactory.initElements(this.driver, o);
+
+		return o;
 	}
 
 	@Override

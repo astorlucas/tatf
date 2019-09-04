@@ -1,8 +1,8 @@
 package uy.com.ces.capacitacion.automation.pageobject;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 import uy.com.ces.capacitacion.automation.selenium.DriverManager;
 
@@ -10,21 +10,26 @@ import uy.com.ces.capacitacion.automation.selenium.DriverManager;
  * @author Dardo De León
  */
 public class CapacitacionAbstract {
+	
 	protected WebDriver driver;
 
-	protected String selBtnToAccess = "Acceder";
-	protected String selInputUserName = "username";
-	protected String selInputUserPass = "password";
-	protected String selBtnLogIn = "loginbtn";
-	protected String selBtnMenu = "(.//*[normalize-space(text()) and normalize-space(.)='Saltar a contenido principal'])[1]/following::span[5]";
-	protected String selBtnLogOut = "Salir";
+	@FindBy(linkText = "Acceder")
+	public WebElement btnToAccess;
 
-	protected By byBtnToAccess = By.linkText(selBtnToAccess);
-	protected By byInputUserName = By.id(selInputUserName);
-	protected By byInputUserPass = By.id(selInputUserPass);
-	protected By byBtnLoginIn = By.id(selBtnLogIn);
-	protected By byBtnMenu = By.xpath(selBtnMenu);
-	protected By byBtnLogOut = By.partialLinkText(selBtnLogOut);
+	@FindBy(id = "username")
+	public WebElement inputUserName;
+
+	@FindBy(id = "password")
+	public WebElement inputUserPass;
+
+	@FindBy(id = "loginbtn")
+	public WebElement btnLoginIn;
+
+	@FindBy(xpath = "(.//*[normalize-space(text()) and normalize-space(.)='Saltar a contenido principal'])[1]/following::span[5]")
+	public WebElement btnMenu;
+
+	@FindBy(partialLinkText = "Salir")
+	public WebElement btnLogOut;
 
 	public CapacitacionAbstract(DriverManager driverManager) {
 		this.driver = driverManager.factoryDriver();
@@ -35,28 +40,23 @@ public class CapacitacionAbstract {
 	}
 
 	public void login(String userName, String userPass) {
-		WebElement btnToAccess = driver.findElement(byBtnToAccess);
-		btnToAccess.click();
+		this.btnToAccess.click();
 
-		WebElement inputUserName = driver.findElement(byInputUserName);
-		inputUserName.click();
-		inputUserName.clear();
-		inputUserName.sendKeys(userName);
+		this.inputUserName.click();
+		this.inputUserName.clear();
+		this.inputUserName.sendKeys(userName);
 
-		WebElement inputUserPass = driver.findElement(byInputUserPass);
-		inputUserPass.click();
-		inputUserPass.clear();
-		inputUserPass.sendKeys(userPass);
+		this.inputUserPass.click();
+		this.inputUserPass.clear();
+		this.inputUserPass.sendKeys(userPass);
 
-		WebElement btnLoginIn = driver.findElement(byBtnLoginIn);
-		btnLoginIn.click();
+		this.btnLoginIn.click();
 	}
 
 	public void logout() {
-		WebElement btnMenu = driver.findElement(byBtnMenu);
-		btnMenu.click();
 
-		WebElement btnLogOut = driver.findElement(byBtnLogOut);
-		btnLogOut.click();
+		this.btnMenu.click();
+
+		this.btnLogOut.click();
 	}
 }

@@ -1,8 +1,8 @@
 package uy.com.ces.capacitacion.automation.pageobject;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 import uy.com.ces.capacitacion.automation.selenium.DriverManager;
 
@@ -11,21 +11,18 @@ import uy.com.ces.capacitacion.automation.selenium.DriverManager;
  */
 public class GoogleSearchImpl extends GoogleAbstract implements GoogleSearch {
 
-	String selInputQuestion = "q";
-
-	By byInputQuestion = By.name(selInputQuestion);
+	@FindBy(name = "q")
+	public WebElement inputQuestion;
 
 	public GoogleSearchImpl(DriverManager driverManager) {
 		super(driverManager);
 	}
 
 	public void searcHome(String texto) {
-		WebElement inputQuestion = driver.findElement(byInputQuestion);
-
-		inputQuestion.click();
-		inputQuestion.clear();
-		inputQuestion.sendKeys(texto);
-		inputQuestion.sendKeys(Keys.ENTER);
+		this.inputQuestion.click();
+		this.inputQuestion.clear();
+		this.inputQuestion.sendKeys(texto);
+		this.inputQuestion.sendKeys(Keys.ENTER);
 	}
 
 	public String getTitle() {
