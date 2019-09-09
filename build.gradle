@@ -54,7 +54,12 @@ dependencies {
     // librería necesaria para loggin de webdriver 
     testCompile 'org.slf4j:slf4j-simple:1.6.1'
 
-    testCompile 'org.assertj:assertj-core:3.13.2'    
+	// librería de assert 
+    testCompile 'org.assertj:assertj-core:3.13.2'
+
+	// librería que aporta útilidades de lenguaje Java 
+	testCompile 'org.apache.commons:commons-lang3:3.9'
+    
 }
 
 application {

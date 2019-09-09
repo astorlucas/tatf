@@ -8,11 +8,13 @@ import uy.com.ces.capacitacion.automation.ConfigInject;
 import uy.com.ces.capacitacion.automation.ConfigInjectResolver;
 import uy.com.ces.capacitacion.automation.DependencyInject;
 import uy.com.ces.capacitacion.automation.DependencyInjectResolver;
+import uy.com.ces.capacitacion.automation.RandomInjectResolver;
 
 /**
  * @author Dardo De León
  */
-@ExtendWith({ 
+@ExtendWith({  
+	RandomInjectResolver.class,
 	ConfigInjectResolver.class, 
 	DependencyInjectResolver.class  
 })
