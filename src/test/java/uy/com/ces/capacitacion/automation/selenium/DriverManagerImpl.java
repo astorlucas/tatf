@@ -1,5 +1,7 @@
 package uy.com.ces.capacitacion.automation.selenium;
 
+import java.util.concurrent.TimeUnit;
+
 import org.apache.commons.lang3.NotImplementedException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -21,11 +23,15 @@ public class DriverManagerImpl implements DriverManager {
 	private WebDriver driver;
 
 	private DriverManagerType driverType;
+	
+	private Integer timeout;
 
 	@Override
-	public void setDriverType(String type) {
+	public void setDriverType(String type, Integer to) {
 		this.driverType = DriverManagerType.valueOf(type);
 
+		this.timeout = to;
+		
 		WebDriverManager.getInstance(this.driverType).setup();
 	}
 
@@ -55,7 +61,9 @@ public class DriverManagerImpl implements DriverManager {
 		default:
 			throw new NotImplementedException("No se encuentra implementado el webdriver %s", this.driverType.name());
 		}
-
+		
+		this.driver.manage().timeouts().implicitlyWait(this.timeout, TimeUnit.SECONDS);
+		
 		return this.driver;
 	}
 

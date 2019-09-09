@@ -13,10 +13,10 @@ import uy.com.ces.capacitacion.automation.RandomInjectResolver;
 /**
  * @author Dardo De León
  */
-@ExtendWith({  
-	RandomInjectResolver.class,
+@ExtendWith({ 
+	RandomInjectResolver.class, 
 	ConfigInjectResolver.class, 
-	DependencyInjectResolver.class  
+	DependencyInjectResolver.class 
 })
 public abstract class DriverManagerAbstract {
 
@@ -31,11 +31,12 @@ public abstract class DriverManagerAbstract {
 	 */
 	@BeforeAll
 	@DependencyInject({ DriverManagerImpl.class })
-	public static void setUp(DriverManager dm, @ConfigInject("web.driver") String driver) {
+	public static void setUp(DriverManager dm, @ConfigInject("web.driver.type") String type,
+			@ConfigInject("web.driver.timeout") Integer timeout) {
 
 		driverManager = dm;
 
-		driverManager.setDriverType(driver);
+		driverManager.setDriverType(type, timeout);
 	}
 
 	/**

@@ -53,8 +53,21 @@ public class ConfigInjectResolver implements ParameterResolver {
 		if (value == null) {
 			throw new ParameterResolutionException("La propiedad " + annotation.value() + " no está disponible.");
 		}
+		
+		Object result = null;
 
-		return value;
+		Class<?> type = parameterContext.getParameter().getType();
+
+		if (type.equals(String.class)) {
+			result = value;
+		} else if (type.equals(Integer.class)) {
+			result = Integer.parseInt(value);
+		} else {
+			throw new ParameterResolutionException(
+					"El tipo de parámetro " + type + " no está soportado por RandomInjectResolver.");
+		}
+
+		return result;
 	}
 
 	/**

@@ -9,9 +9,10 @@ import org.openqa.selenium.WebDriver;
  */
 public interface DriverManager {
 	/**
-	 * @param string indicando el Driver que debe emplearse
+	 * @param string  indicando el Driver que debe emplearse
+	 * @param integer timeout
 	 */
-	void setDriverType(String type);
+	void setDriverType(String type, Integer timeout);
 
 	/**
 	 * @return Instancia de WebDriver del tipo asignado por medio de setDriverType
@@ -22,10 +23,10 @@ public interface DriverManager {
 	 * Cierra la instancia de WebDriver iniciada al llamar el método factoryDriver
 	 */
 	void destroyDriver();
-	
+
 	/**
 	 * @param <T>
-	 * @param o Objeto con atributos decorados con FindBy
+	 * @param o   Objeto con atributos decorados con FindBy
 	 * @return El objeto recibido
 	 */
 	<T extends Object> T factoryElements(T o);
