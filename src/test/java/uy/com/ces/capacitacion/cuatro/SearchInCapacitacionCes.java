@@ -9,9 +9,9 @@ import org.junit.jupiter.api.Test;
 import uy.com.ces.capacitacion.automation.ConfigInject;
 import uy.com.ces.capacitacion.automation.ConfigInjectResources;
 import uy.com.ces.capacitacion.automation.DependencyInject;
-import uy.com.ces.capacitacion.automation.pageobject.CapacitacionCes;
 import uy.com.ces.capacitacion.automation.pageobject.PageObjectFactory;
 import uy.com.ces.capacitacion.automation.pageobject.PageObjectFactoryImpl;
+import uy.com.ces.capacitacion.automation.pageobject.moodle.CapacitacionCes;
 import uy.com.ces.capacitacion.automation.selenium.DriverManagerAbstract;
 
 /**
@@ -31,7 +31,6 @@ public class SearchInCapacitacionCes extends DriverManagerAbstract {
 		this.cc = pageObjectFactory.factoryCapacitacionCes(driverManager);
 	}
 
-	@Tag("dev")
 	@Test
 	public void testSearchPostCes(@ConfigInject("pagina.ces.home.page") String homepage,
 			@ConfigInject("pagina.ces.user.name") String userName,

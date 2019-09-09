@@ -1,5 +1,11 @@
 package uy.com.ces.capacitacion.automation.pageobject;
 
+import uy.com.ces.capacitacion.automation.pageobject.google.GoogleGmail;
+import uy.com.ces.capacitacion.automation.pageobject.google.GoogleGmailImpl;
+import uy.com.ces.capacitacion.automation.pageobject.google.GoogleSearch;
+import uy.com.ces.capacitacion.automation.pageobject.google.GoogleSearchImpl;
+import uy.com.ces.capacitacion.automation.pageobject.moodle.CapacitacionCes;
+import uy.com.ces.capacitacion.automation.pageobject.moodle.CapacitacionCesImpl;
 import uy.com.ces.capacitacion.automation.selenium.DriverManager;
 
 public class PageObjectFactoryImpl implements PageObjectFactory {

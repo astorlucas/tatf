@@ -1,4 +1,4 @@
-package uy.com.ces.capacitacion.automation.pageobject;
+package uy.com.ces.capacitacion.automation.pageobject.moodle;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;

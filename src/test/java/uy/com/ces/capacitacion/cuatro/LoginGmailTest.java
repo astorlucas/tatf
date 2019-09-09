@@ -9,9 +9,9 @@ import org.junit.jupiter.api.Test;
 import uy.com.ces.capacitacion.automation.ConfigInject;
 import uy.com.ces.capacitacion.automation.ConfigInjectResources;
 import uy.com.ces.capacitacion.automation.DependencyInject;
-import uy.com.ces.capacitacion.automation.pageobject.GoogleGmail;
 import uy.com.ces.capacitacion.automation.pageobject.PageObjectFactory;
 import uy.com.ces.capacitacion.automation.pageobject.PageObjectFactoryImpl;
+import uy.com.ces.capacitacion.automation.pageobject.google.GoogleGmail;
 import uy.com.ces.capacitacion.automation.selenium.DriverManagerAbstract;
 
 /**
@@ -31,7 +31,6 @@ public class LoginGmailTest extends DriverManagerAbstract {
 		this.gm = pageObjectFactory.factoryGoogleGmail(driverManager);
 	}
 
-	@Tag("dev")
 	@Test
 	public void testLoginGmail(@ConfigInject("pagina.google.home.page") String homepage,
 			@ConfigInject("pagina.google.user.name") String userName,

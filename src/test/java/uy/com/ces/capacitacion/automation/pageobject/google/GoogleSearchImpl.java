@@ -1,4 +1,4 @@
-package uy.com.ces.capacitacion.automation.pageobject;
+package uy.com.ces.capacitacion.automation.pageobject.google;
 
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;

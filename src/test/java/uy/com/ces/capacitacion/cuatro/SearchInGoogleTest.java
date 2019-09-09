@@ -9,9 +9,9 @@ import org.junit.jupiter.api.Test;
 import uy.com.ces.capacitacion.automation.ConfigInject;
 import uy.com.ces.capacitacion.automation.ConfigInjectResources;
 import uy.com.ces.capacitacion.automation.DependencyInject;
-import uy.com.ces.capacitacion.automation.pageobject.GoogleSearch;
 import uy.com.ces.capacitacion.automation.pageobject.PageObjectFactory;
 import uy.com.ces.capacitacion.automation.pageobject.PageObjectFactoryImpl;
+import uy.com.ces.capacitacion.automation.pageobject.google.GoogleSearch;
 import uy.com.ces.capacitacion.automation.selenium.DriverManagerAbstract;
 
 /**
@@ -31,7 +31,6 @@ public class SearchInGoogleTest extends DriverManagerAbstract {
 		this.gs = pageObjectFactory.factoryGoogleSearch(driverManager);
 	}
 
-	@Tag("dev")
 	@Test
 	public void testSearchTextGoogle(@ConfigInject("pagina.google.home.page") String homepage,
 			@ConfigInject("pagina.google.buscar.texto") String text) {
