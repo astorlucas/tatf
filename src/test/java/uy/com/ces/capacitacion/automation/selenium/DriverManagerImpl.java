@@ -37,32 +37,37 @@ public class DriverManagerImpl implements DriverManager {
 
 	@Override
 	public WebDriver factoryDriver() {
-		switch (this.driverType) {
-		case CHROME:
-			this.driver = new ChromeDriver();
-			break;
-		case FIREFOX:
-			this.driver = new FirefoxDriver();
-			break;
-		case EDGE:
-			this.driver = new EdgeDriver();
-			break;
-		case OPERA:
-			this.driver = new OperaDriver();
-			break;
-		case IEXPLORER:
-			this.driver = new InternetExplorerDriver();
-			break;
-		case PHANTOMJS:
-			/**
-			 * this.driver = new PhantomJSDriver(); break;
-			 */
-		case SELENIUM_SERVER_STANDALONE:
-		default:
-			throw new NotImplementedException("No se encuentra implementado el webdriver %s", this.driverType.name());
-		}
 		
-		this.driver.manage().timeouts().implicitlyWait(this.timeout, TimeUnit.SECONDS);
+		if (this.driver == null) {
+			switch (this.driverType) {
+			case CHROME:
+				this.driver = new ChromeDriver();
+				break;
+			case FIREFOX:
+				this.driver = new FirefoxDriver();
+				break;
+			case EDGE:
+				this.driver = new EdgeDriver();
+				break;
+			case OPERA:
+				this.driver = new OperaDriver();
+				break;
+			case IEXPLORER:
+				this.driver = new InternetExplorerDriver();
+				break;
+			case PHANTOMJS:
+				/**
+				 * this.driver = new PhantomJSDriver(); break;
+				 */
+			case SELENIUM_SERVER_STANDALONE:
+			default:
+				throw new NotImplementedException("No se encuentra implementado el webdriver %s", this.driverType.name());
+			}
+			
+			if (this.timeout > 0) {
+				this.driver.manage().timeouts().implicitlyWait(this.timeout, TimeUnit.SECONDS);	
+			}
+		}
 		
 		return this.driver;
 	}
