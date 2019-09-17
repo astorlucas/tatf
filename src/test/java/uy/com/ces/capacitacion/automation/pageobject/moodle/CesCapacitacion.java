@@ -1,6 +1,6 @@
 package uy.com.ces.capacitacion.automation.pageobject.moodle;
 
-public interface CapacitacionCes {
+public interface CesCapacitacion {
 
 	void goHome(String homepage);
 

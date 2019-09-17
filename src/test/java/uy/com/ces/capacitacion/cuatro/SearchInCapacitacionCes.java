@@ -3,7 +3,6 @@ package uy.com.ces.capacitacion.cuatro;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import uy.com.ces.capacitacion.automation.ConfigInject;
@@ -11,7 +10,7 @@ import uy.com.ces.capacitacion.automation.ConfigInjectResources;
 import uy.com.ces.capacitacion.automation.DependencyInject;
 import uy.com.ces.capacitacion.automation.pageobject.PageObjectFactory;
 import uy.com.ces.capacitacion.automation.pageobject.PageObjectFactoryImpl;
-import uy.com.ces.capacitacion.automation.pageobject.moodle.CapacitacionCes;
+import uy.com.ces.capacitacion.automation.pageobject.moodle.CesCapacitacion;
 import uy.com.ces.capacitacion.automation.selenium.DriverManagerAbstract;
 
 /**
@@ -23,12 +22,12 @@ import uy.com.ces.capacitacion.automation.selenium.DriverManagerAbstract;
 })
 public class SearchInCapacitacionCes extends DriverManagerAbstract {
 
-	protected CapacitacionCes cc;
+	protected CesCapacitacion cc;
 
 	@BeforeEach
 	@DependencyInject({ PageObjectFactoryImpl.class })
 	public void setUp(PageObjectFactory pageObjectFactory) {
-		this.cc = pageObjectFactory.factoryCapacitacionCes(driverManager);
+		this.cc = pageObjectFactory.factoryCesCapacitacion(driverManager);
 	}
 
 	@Test

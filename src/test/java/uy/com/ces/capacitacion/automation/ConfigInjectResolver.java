@@ -53,7 +53,7 @@ public class ConfigInjectResolver implements ParameterResolver {
 		if (value == null) {
 			throw new ParameterResolutionException("La propiedad " + annotation.value() + " no está disponible.");
 		}
-		
+
 		Object result = null;
 
 		Class<?> type = parameterContext.getParameter().getType();

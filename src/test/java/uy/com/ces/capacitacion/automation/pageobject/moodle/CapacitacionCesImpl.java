@@ -9,7 +9,7 @@ import uy.com.ces.capacitacion.automation.selenium.DriverManager;
 /**
  * @author Dardo De León
  */
-public class CapacitacionCesImpl extends CapacitacionAbstract implements CapacitacionCes {
+public class CapacitacionCesImpl extends CapacitacionAbstract implements CesCapacitacion {
 
 	@FindBy(id = "searchform_search")
 	protected WebElement inputSearch;
