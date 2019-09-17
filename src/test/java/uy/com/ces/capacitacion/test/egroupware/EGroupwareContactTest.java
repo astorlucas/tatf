@@ -1,4 +1,4 @@
-package uy.com.ces.capacitacion.cinco;
+package uy.com.ces.capacitacion.test.egroupware;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

@@ -1,10 +1,14 @@
-package uy.com.ces.capacitacion.dos.logica;
+package uy.com.ces.capacitacion.test.carrito;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import uy.com.ces.capacitacion.dos.logica.FactoryCarrito;
+import uy.com.ces.capacitacion.dos.logica.ICarrito;
+import uy.com.ces.capacitacion.dos.logica.Producto;
 
 public class CarritoTest {
 

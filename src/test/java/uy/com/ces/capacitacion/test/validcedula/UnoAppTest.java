@@ -1,4 +1,4 @@
-package uy.com.ces.capacitacion.uno;
+package uy.com.ces.capacitacion.test.validcedula;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -13,6 +13,10 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import uy.com.ces.capacitacion.uno.AppUno;
+import uy.com.ces.capacitacion.uno.ValidCedula;
+import uy.com.ces.capacitacion.uno.ValidCedulaImpl;
 
 /**
  * @author Dardo De León
