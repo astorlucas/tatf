@@ -1,5 +1,9 @@
 package uy.com.ces.capacitacion.automation.selenium;
 
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.lang3.NotImplementedException;
@@ -23,7 +27,7 @@ public class DriverManagerImpl implements DriverManager {
 	private WebDriver driver;
 
 	private DriverManagerType driverType;
-	
+
 	private Integer timeout;
 
 	@Override
@@ -31,13 +35,13 @@ public class DriverManagerImpl implements DriverManager {
 		this.driverType = DriverManagerType.valueOf(type);
 
 		this.timeout = to;
-		
+
 		WebDriverManager.getInstance(this.driverType).setup();
 	}
 
 	@Override
 	public WebDriver factoryDriver() {
-		
+
 		if (this.driver == null) {
 			switch (this.driverType) {
 			case CHROME:
@@ -61,14 +65,15 @@ public class DriverManagerImpl implements DriverManager {
 				 */
 			case SELENIUM_SERVER_STANDALONE:
 			default:
-				throw new NotImplementedException("No se encuentra implementado el webdriver %s", this.driverType.name());
+				throw new NotImplementedException("No se encuentra implementado el webdriver %s",
+						this.driverType.name());
 			}
-			
+
 			if (this.timeout > 0) {
-				this.driver.manage().timeouts().implicitlyWait(this.timeout, TimeUnit.SECONDS);	
+				this.driver.manage().timeouts().implicitlyWait(this.timeout, TimeUnit.SECONDS);
 			}
 		}
-		
+
 		return this.driver;
 	}
 
@@ -85,5 +90,36 @@ public class DriverManagerImpl implements DriverManager {
 			this.driver.close();
 			this.driver = null;
 		}
+	}
+	
+	@Override
+	public String getPopHandle(String winHandle, Set<String> winHandles) {
+
+		if (winHandle == null) {
+			throw new IllegalStateException("Se debe indicar el nombre de la ventana principal.");
+		}
+		
+		if (winHandles == null) {
+			throw new IllegalStateException("Se debe indicar un set de nombres de ventanas.");
+		}
+		
+		List<String> result = new LinkedList<String>();
+
+		Iterator<String> listWinHandles = winHandles.iterator();
+
+		while (listWinHandles.hasNext()) {
+			String next = listWinHandles.next();
+			if (!next.equalsIgnoreCase(winHandle) && !result.contains(next)) {
+				result.add(next);
+			}
+		}
+
+		if (result.isEmpty()) {
+			throw new IllegalStateException("No se encontró un nombre de ventana.");
+		} else if (result.size() > 1) {
+			throw new IllegalStateException("Se encontraron "+ result.size() +" nombres de ventanas, solo se permite la ubicación de uno.");
+		}
+
+		return result.get(0);
 	}
 }

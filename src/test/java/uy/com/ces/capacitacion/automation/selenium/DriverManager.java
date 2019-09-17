@@ -1,5 +1,7 @@
 package uy.com.ces.capacitacion.automation.selenium;
 
+import java.util.Set;
+
 import org.openqa.selenium.WebDriver;
 
 /**
@@ -30,4 +32,13 @@ public interface DriverManager {
 	 * @return El objeto recibido
 	 */
 	<T extends Object> T factoryElements(T o);
+
+	/**
+	 * @param winHandle     Ventana principal
+	 * @param windowHandles Lista de ventanas manejadas por el driver
+	 * @return Nombre la ventana disponible en windowHandles que no coincide con
+	 *         winHandle. Si windowHandles posee más de tres nombres, o no posee
+	 *         dos, genera una excepción.
+	 */
+	String getPopHandle(String winHandle, Set<String> windowHandles) throws IllegalStateException;
 }
