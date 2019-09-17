@@ -14,8 +14,33 @@ import java.lang.annotation.Target;
 @Target(ElementType.PARAMETER)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface RandomInject {
+
+	static final int STRING = 0;
+
+	static final int COUNTRY_ID = 1;
+
+	static final int COUNTRY_NAME = 2;
+
+	static final int COLOR_HEX = 3;
+
+	/**
+	 * @return Indica el tipo de valor random a inyectar
+	 */
+	int type() default STRING;
+
 	/**
 	 * @return Largo máximo del valor random
 	 */
-	int value() default 10;
+	int min() default 0;
+
+	/**
+	 * @return Largo máximo del valor random
+	 */
+	int max() default 10;
+
+	/**
+	 * @return Lista de cadenas en base a la cual se realiza la selección de una de
+	 *         ellas.
+	 */
+	String[] options() default {};
 }
