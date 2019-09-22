@@ -42,7 +42,7 @@ public class DependencyInjectResolver implements ParameterResolver {
 
 	/**
 	 * Recupera la anotación DependencyInject y de ella la primer clase que pueda
-	 * resolver el tipo de dato que require el parámetro que se esta resolviendo.
+	 * resolver el tipo de dato que requiere el parámetro que se esta resolviendo.
 	 * 
 	 * @throws ParameterResolutionException Si falla la creación de una instancia de
 	 *                                      factory; no existe la anotación
@@ -111,7 +111,7 @@ public class DependencyInjectResolver implements ParameterResolver {
 	 * @param clase  Interface del parámetro que se debe resolver.
 	 * @param clases Array de clases que pueden resolver una instancia de clase.
 	 * @return Retorna la primer clase de {@clases} que pueda ser asignada como la
-	 *         interface recibida en el prametro {@clase}
+	 *         interface recibida en el parámetro {@clase}
 	 */
 	protected static Class<?> findImplement(Class<?> clase, Class<?>[] clases) {
 

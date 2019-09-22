@@ -26,50 +26,58 @@ repositories {
 
 dependencies {
     // This dependency is used by the application.
-    implementation 'com.google.guava:guava:27.1-jre'
+    compile 'com.google.guava:guava:27.1-jre'
 
     // Use JUnit test framework
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.5.1'
+    compile 'org.junit.jupiter:junit-jupiter-engine:5.5.1'
     
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.5.1'
+    compile 'org.junit.jupiter:junit-jupiter-api:5.5.1'
     
 	// requerido para usar las anotaciones @ParameterizedTest y @ValueSource 
-    testImplementation 'org.junit.jupiter:junit-jupiter-params:5.5.1'
+    compile 'org.junit.jupiter:junit-jupiter-params:5.5.1'
+    
+    // nuevas dependencias JUnit para manejar Suites y Runner
+    compile 'org.junit.platform:junit-platform-suite-api:1.5.2'
+    compile 'org.junit.platform:junit-platform-runner:1.5.2'
     
     // manejador de webdrivers
-    testCompile 'io.github.bonigarcia:webdrivermanager:3.6.2'
+    compile 'io.github.bonigarcia:webdrivermanager:3.6.2'
     
     // selenium
-    testCompile 'org.seleniumhq.selenium:selenium-api:3.141.59'
-    testCompile 'org.seleniumhq.selenium:selenium-java:3.141.59'
-    testCompile 'org.seleniumhq.selenium:selenium-remote-driver:3.141.59'
-    testCompile 'org.seleniumhq.selenium:selenium-chrome-driver:3.141.59'
-    testCompile 'org.seleniumhq.selenium:selenium-firefox-driver:3.141.59'
-    testCompile 'org.seleniumhq.selenium:selenium-ie-driver:3.141.59'
-    testCompile 'org.seleniumhq.selenium:selenium-safari-driver:3.141.59'
-    testCompile 'org.seleniumhq.selenium:selenium-edge-driver:3.141.59'
-    testCompile 'org.seleniumhq.selenium:selenium-opera-driver:3.141.59'
-	// 'com.codeborne:phantomjsdriver:1.4.4'
+    compile 'org.seleniumhq.selenium:selenium-api:3.141.59'
+    compile 'org.seleniumhq.selenium:selenium-java:3.141.59'
+    compile 'org.seleniumhq.selenium:selenium-remote-driver:3.141.59'
+    compile 'org.seleniumhq.selenium:selenium-chrome-driver:3.141.59'
+    compile 'org.seleniumhq.selenium:selenium-firefox-driver:3.141.59'
+    compile 'org.seleniumhq.selenium:selenium-ie-driver:3.141.59'
+    compile 'org.seleniumhq.selenium:selenium-safari-driver:3.141.59'
+    compile 'org.seleniumhq.selenium:selenium-edge-driver:3.141.59'
+    compile 'org.seleniumhq.selenium:selenium-opera-driver:3.141.59'	
     
     // librería necesaria para loggin de webdriver 
-    testCompile 'org.slf4j:slf4j-simple:1.6.1'
+    compile 'org.slf4j:slf4j-simple:1.6.1'
 
 	// librería de assert 
-    testCompile 'org.assertj:assertj-core:3.13.2'
+    compile 'org.assertj:assertj-core:3.13.2'
 
 	// librería que aporta útilidades de lenguaje Java 
-	testCompile 'org.apache.commons:commons-lang3:3.9'
+	compile 'org.apache.commons:commons-lang3:3.9'
     
 }
 
 application {
     // Define the main class for the application
-    mainClassName = 'uy.com.ces.capacitacion.App'
+    mainClassName = 'uy.com.ces.capacitacion.suites.runner.SuiteRunner'
 }
 
 jar {
+	from {
+        (configurations.runtime).collect {
+            it.isDirectory() ? it : zipTree(it)
+        }
+    }
     manifest {
-        attributes 'Main-Class': 'uy.com.ces.capacitacion.App'
+        attributes 'Main-Class': 'uy.com.ces.capacitacion.suites.runner.SuiteRunner'
     }
 }
 
@@ -96,3 +104,15 @@ task testDev(type: Test) {
     check.dependsOn it
     shouldRunAfter test
 }
+
+sourceSets {
+	main {
+		resources {
+			srcDirs = ['../../src/test/resources' ]
+		}
+		java {
+			srcDirs = ['src', 'test']
+		}
+	}
+}
+

@@ -150,7 +150,7 @@ public class RandomInjectResolver implements ParameterResolver {
 	}
 
 	/**
-	 * @param max Maximo valor a retornar
+	 * @param max Máximo valor a retornar
 	 * @return Retorna un número entre 0 y max - 1
 	 */
 	public Integer getInteger(Integer max) {
@@ -158,8 +158,8 @@ public class RandomInjectResolver implements ParameterResolver {
 	}
 
 	/**
-	 * @param min Minimo valor a retornar
-	 * @param max Maximo valor a retornar
+	 * @param min Mínimo valor a retornar
+	 * @param max Máximo valor a retornar
 	 * @return Retorna un número entre min y max - 1
 	 */
 	public Integer getInteger(int min, int max) {
@@ -167,8 +167,8 @@ public class RandomInjectResolver implements ParameterResolver {
 	}
 
 	/**
-	 * @param min Minimo valor a retornar
-	 * @param max Maximo valor a retornar
+	 * @param min Mínimo valor a retornar
+	 * @param max Máximo valor a retornar
 	 * @return Retorna un número de coma flotante, entre los enteros min y max - 1
 	 */
 	public Float getFloat(int min, int max) {
@@ -177,9 +177,9 @@ public class RandomInjectResolver implements ParameterResolver {
 
 	/**
 	 * @param RandomInject.COUNTRY_ID o RandomInject.COUNTRY_NAME.
-	 * @return por defecto retorna un nombre de pais; si key =
+	 * @return por defecto retorna un nombre de país; si key =
 	 *         RandomInject.COUNTRY_ID retorna un identificador ISO_3166-1_alpha-2
-	 *         de páis.
+	 *         de país.
 	 */
 	public String getCountry(int key) {
 
@@ -190,7 +190,7 @@ public class RandomInjectResolver implements ParameterResolver {
 
 	/**
 	 * @param max Número mayor o igual a cero.
-	 * @return Retorna una cadena de texto, con caracteres alfanumericos aleatorios.
+	 * @return Retorna una cadena de texto, con caracteres alfanuméricos aleatorios.
 	 */
 	public String getString(int max) {
 		return RandomStringUtils.randomAlphanumeric(max);
