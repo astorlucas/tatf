@@ -1,15 +1,11 @@
 package uy.com.ces.capacitacion.automation.pageobject.egroupware;
 
 import java.time.Duration;
-import java.util.NoSuchElementException;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.Wait;
 
 import uy.com.ces.capacitacion.automation.pageobject.PageObjectFactory;
 import uy.com.ces.capacitacion.automation.selenium.DriverManager;
@@ -79,12 +75,13 @@ public class ContactFormImpl implements ContactForm {
 	@FindBy(id = "exec[button][save]")
 	protected WebElement btnSave;
 
-	protected long timeOut = 30;
-	protected long pollingEvery = 5;
-	protected Wait<WebDriver> fw;
+	protected Duration timeOutSelect = Duration.ofSeconds(30);
+	protected Duration pollingSelect = Duration.ofSeconds(5);
+
+	protected Duration waitPageLoading = Duration.ofSeconds(6);
 
 	/**
-	 * eGroupWare [Add ProjectManager category for: USERNAME User]
+	 * eGroupWare [Add ProjectManager category for: USERNAME User]
 	 */
 	protected String title = "eGroupWare [Addressbook]";
 
@@ -94,11 +91,6 @@ public class ContactFormImpl implements ContactForm {
 		this.pageObjectFactory = pof;
 
 		this.driver = this.driverManager.factoryDriver();
-
-		this.fw = new FluentWait<>(driver)
-				.withTimeout(Duration.ofSeconds(timeOut))
-				.pollingEvery(Duration.ofSeconds(pollingEvery))
-				.ignoring(NoSuchElementException.class);
 	}
 
 	@Override
@@ -118,6 +110,8 @@ public class ContactFormImpl implements ContactForm {
 			Integer telHome) {
 
 		String winHandle = this.driver.getWindowHandle();
+
+		this.driverManager.stop(waitPageLoading);
 
 		String popHandle = this.driverManager.getPopHandle(winHandle, this.driver.getWindowHandles());
 
@@ -167,7 +161,10 @@ public class ContactFormImpl implements ContactForm {
 		this.inputAddrOnePostalCode.clear();
 		this.inputAddrOnePostalCode.sendKeys(adrOnePostalcode);
 
-		this.selectAddrOneCountryName = this.fw.until(ExpectedConditions.elementToBeClickable(this.selectAddrOneCountryName));
+		this.selectAddrOneCountryName = this.driverManager.fluentWaitToBeClickable(
+				this.selectAddrOneCountryName, 
+				this.timeOutSelect, 
+				this.pollingSelect);
 		new Select(this.selectAddrOneCountryName).selectByVisibleText(adrOneCountryname);
 		this.selectAddrOneCountryName.click();
 

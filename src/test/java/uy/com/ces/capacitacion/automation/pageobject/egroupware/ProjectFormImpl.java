@@ -1,15 +1,11 @@
 package uy.com.ces.capacitacion.automation.pageobject.egroupware;
 
 import java.time.Duration;
-import java.util.NoSuchElementException;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.Wait;
 
 import uy.com.ces.capacitacion.automation.pageobject.PageObjectFactory;
 import uy.com.ces.capacitacion.automation.selenium.DriverManager;
@@ -58,9 +54,8 @@ public class ProjectFormImpl implements ProjectForm {
 	protected String titleEdit = "eGroupWare [ProjectManager - Edit project]";
 	protected String titleCreate = "eGroupWare [ProjectManager - Add project]";
 
-	protected long timeOut = 30;
-	protected long pollingEvery = 5;
-	protected Wait<WebDriver> fw;
+	protected Duration timeOut = Duration.ofSeconds(30);
+	protected Duration polling = Duration.ofSeconds(5);
 
 	public ProjectFormImpl(DriverManager dm, PageObjectFactory pof) {
 
@@ -68,9 +63,6 @@ public class ProjectFormImpl implements ProjectForm {
 		this.pageObjectFactory = pof;
 
 		this.driver = this.driverManager.factoryDriver();
-
-		this.fw = new FluentWait<>(driver).withTimeout(Duration.ofSeconds(timeOut))
-				.pollingEvery(Duration.ofSeconds(pollingEvery)).ignoring(NoSuchElementException.class);
 
 		if (!this.validPage()) {
 			throw new IllegalStateException("No se encuentra en la página de alta de proyecto.");
@@ -98,11 +90,11 @@ public class ProjectFormImpl implements ProjectForm {
 		this.inputTitle.clear();
 		this.inputTitle.sendKeys(projectName);
 
-		this.selectCategory = this.fw.until(ExpectedConditions.elementToBeClickable(this.selectCategory));
+		this.selectCategory = this.driverManager.fluentWaitToBeClickable(this.selectCategory, this.timeOut, this.polling);
 		new Select(this.selectCategory).selectByVisibleText(categoryName);
 		this.selectPriority.click();
 
-		this.selectPriority = this.fw.until(ExpectedConditions.elementToBeClickable(this.selectPriority));
+		this.selectPriority = this.driverManager.fluentWaitToBeClickable(this.selectPriority, this.timeOut, this.polling);
 		new Select(this.selectPriority).selectByVisibleText(projectPriority.toString());
 		this.selectPriority.click();
 
@@ -114,14 +106,14 @@ public class ProjectFormImpl implements ProjectForm {
 
 		this.btnTabMembers.click();
 
-		this.selectMember = this.fw.until(ExpectedConditions.elementToBeClickable(this.selectMember));
+		this.selectMember = this.driverManager.fluentWaitToBeClickable(this.selectMember, this.timeOut, this.polling);
 		new Select(this.selectMember).selectByVisibleText(member);
 		this.selectMember.click();
 
 		this.inputMemberAvailibility.clear();
 		this.inputMemberAvailibility.sendKeys(availibility.toString());
 
-		this.selectMemberRole = this.fw.until(ExpectedConditions.elementToBeClickable(this.selectMemberRole));
+		this.selectMemberRole = this.driverManager.fluentWaitToBeClickable(this.selectMemberRole, this.timeOut, this.polling);
 		new Select(this.selectMemberRole).selectByVisibleText(role);
 		this.selectMemberRole.click();
 

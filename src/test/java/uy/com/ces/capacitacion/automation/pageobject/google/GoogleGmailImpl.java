@@ -1,9 +1,9 @@
 package uy.com.ces.capacitacion.automation.pageobject.google;
 
+import java.time.Duration;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import uy.com.ces.capacitacion.automation.selenium.DriverManager;
 
@@ -12,8 +12,7 @@ import uy.com.ces.capacitacion.automation.selenium.DriverManager;
  */
 public class GoogleGmailImpl extends GoogleAbstract implements GoogleGmail {
 
-	protected long timeOutGeneral = 30;
-	protected WebDriverWait wdw;
+	protected Duration waitPageLoading = Duration.ofSeconds(10);
 
 	@FindBy(linkText = "Gmail")
 	public WebElement btnGmalApp;
@@ -27,25 +26,36 @@ public class GoogleGmailImpl extends GoogleAbstract implements GoogleGmail {
 	public GoogleGmailImpl(DriverManager driverManager) {
 		super(driverManager);
 
-		wdw = new WebDriverWait(this.driver, this.timeOutGeneral);
+		this.driverManager.stop(waitPageLoading);
 	}
 
 	@Override
 	public void goGmailApp() {
-		this.btnGmalApp = wdw.until(ExpectedConditions.elementToBeClickable(this.btnGmalApp));
+
+		this.btnGmalApp = this.driverManager.fluentWaitToBeClickable(
+				this.btnGmalApp, 
+				this.timeOutClick,
+				this.pollingClick);
+
 		this.btnGmalApp.click();
 	}
 
 	@Override
 	public String getTitle() {
+
+		this.driverManager.stop(waitPageLoading);
+		
 		return this.driver.getTitle();
 	}
 
 	@Override
 	public void logout() {
-		
-		this.btnGmalMenuRightTop = wdw.until(ExpectedConditions.elementToBeClickable(this.btnGmalMenuRightTop));
-		
+
+		this.btnGmalMenuRightTop = this.driverManager.fluentWaitToBeClickable(
+				this.btnGmalMenuRightTop,
+				this.timeOutClick, 
+				this.pollingClick);
+
 		this.btnGmalMenuRightTop.click();
 
 		this.btnGmailMenuRightTopBtnLogout.click();

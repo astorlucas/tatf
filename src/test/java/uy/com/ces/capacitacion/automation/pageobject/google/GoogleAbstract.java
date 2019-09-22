@@ -3,14 +3,10 @@ package uy.com.ces.capacitacion.automation.pageobject.google;
 import java.time.Duration;
 
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.FluentWait;
-import org.openqa.selenium.support.ui.Wait;
 
 import uy.com.ces.capacitacion.automation.selenium.DriverManager;
 
@@ -19,11 +15,12 @@ import uy.com.ces.capacitacion.automation.selenium.DriverManager;
  */
 public abstract class GoogleAbstract {
 
+	protected DriverManager driverManager;
+	
 	protected WebDriver driver;
 
-	protected long timeOut = 30;
-	protected long pollingEvery = 5;
-	protected Wait<WebDriver> fw;
+	protected Duration timeOutClick = Duration.ofSeconds(30);
+	protected Duration pollingClick = Duration.ofSeconds(5);
 
 	@FindBy(id = "gb_70")
 	public WebElement btnLogin;
@@ -34,13 +31,10 @@ public abstract class GoogleAbstract {
 	@FindBy(id = "password")
 	public WebElement inputPassword;
 
-	public GoogleAbstract(DriverManager driverManager) {
-		this.driver = driverManager.factoryDriver();
-
-		this.fw = new FluentWait<>(driver)
-				.withTimeout(Duration.ofSeconds(timeOut))
-				.pollingEvery(Duration.ofSeconds(pollingEvery))
-				.ignoring(NoSuchElementException.class);
+	public GoogleAbstract(DriverManager dm) {
+		this.driverManager = dm;
+		
+		this.driver = this.driverManager.factoryDriver();
 	}
 
 	public void goHome(String homepage) {
@@ -51,7 +45,7 @@ public abstract class GoogleAbstract {
 
 		this.btnLogin.click();
 
-		this.inputUserName = this.fw.until(ExpectedConditions.elementToBeClickable(this.inputUserName));
+		this.inputUserName = this.driverManager.fluentWaitToBeClickable(this.inputUserName, this.timeOutClick, this.pollingClick);
 
 		Actions actionUser = new Actions(this.driver);
 		actionUser.moveToElement(this.inputUserName);
@@ -59,7 +53,7 @@ public abstract class GoogleAbstract {
 		actionUser.sendKeys(Keys.RETURN);
 		actionUser.build().perform();
 
-		this.inputPassword = this.fw.until(ExpectedConditions.elementToBeClickable(this.inputPassword));
+		this.inputPassword = this.driverManager.fluentWaitToBeClickable(this.inputPassword, this.timeOutClick, this.pollingClick);
 		
 		Actions actionPass = new Actions(this.driver);
 		actionPass.moveToElement(this.inputPassword);

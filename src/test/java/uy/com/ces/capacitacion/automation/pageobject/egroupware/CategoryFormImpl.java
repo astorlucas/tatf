@@ -1,16 +1,11 @@
 package uy.com.ces.capacitacion.automation.pageobject.egroupware;
 
 import java.time.Duration;
-import java.util.NoSuchElementException;
-import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.Wait;
 
 import uy.com.ces.capacitacion.automation.pageobject.PageObjectFactory;
 import uy.com.ces.capacitacion.automation.selenium.DriverManager;
@@ -36,9 +31,9 @@ public class CategoryFormImpl implements CategoryForm {
 	@FindBy(name = "save")
 	protected WebElement btnSave;
 
-	protected long timeOut = 30;
-	protected long pollingEvery = 10;
-	protected Wait<WebDriver> fw;
+	protected Duration waitPageLoading = Duration.ofSeconds(6);
+	protected Duration timeOutSelect = Duration.ofSeconds(30);
+	protected Duration pollingEverySelect = Duration.ofSeconds(10);
 
 	/**
 	 * eGroupWare [Add ProjectManager category for: USERNAME User]
@@ -65,7 +60,7 @@ public class CategoryFormImpl implements CategoryForm {
 	@Override
 	public CategoryList createCategory(String name, String description, String color, String type) {
 
-		this.driver.manage().timeouts().implicitlyWait(timeOut, TimeUnit.SECONDS);
+		this.driverManager.stop(waitPageLoading);
 
 		this.inputName.clear();
 		this.inputName.sendKeys(name);
@@ -76,11 +71,8 @@ public class CategoryFormImpl implements CategoryForm {
 		this.inputColor.clear();
 		this.inputColor.sendKeys(color);
 
-		this.fw = new FluentWait<>(this.driver)
-				.withTimeout(Duration.ofSeconds(this.timeOut))
-				.pollingEvery(Duration.ofSeconds(this.pollingEvery))
-				.ignoring(NoSuchElementException.class);
-		this.selectType = this.fw.until(ExpectedConditions.elementToBeClickable(this.selectType));
+		this.selectType = this.driverManager.fluentWaitToBeClickable(this.selectType, 
+				this.timeOutSelect, this.pollingEverySelect);
 		new Select(this.selectType).selectByVisibleText(type);
 		this.selectType.click();
 

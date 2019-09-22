@@ -1,5 +1,7 @@
 package uy.com.ces.capacitacion.automation.pageobject.egroupware;
 
+import java.time.Duration;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -26,6 +28,8 @@ public class ContactListImpl implements ContactList {
 	@FindBy(xpath = "//table[@class=\"nextmatch_header\"]//input[@id=\"exec[nm][search]\"]")
 	protected WebElement inputSearch;
 
+	protected Duration waitPageLoading = Duration.ofSeconds(6);
+
 	protected String title = "eGroupWare [Addressbook]";
 
 	public ContactListImpl(MainMenu mm, DriverManager dm, PageObjectFactory pof) {
@@ -49,7 +53,7 @@ public class ContactListImpl implements ContactList {
 
 	@Override
 	public ContactForm newContacto() {
-		
+
 		this.btnAdd.click();
 
 		return this.pageObjectFactory.factoryEgroupwareContactoForm(this.driverManager);
@@ -57,6 +61,9 @@ public class ContactListImpl implements ContactList {
 
 	@Override
 	public String getTextMainForm() {
+		
+		this.driverManager.stop(waitPageLoading);
+		
 		return this.mainForm.getText();
 	}
 
