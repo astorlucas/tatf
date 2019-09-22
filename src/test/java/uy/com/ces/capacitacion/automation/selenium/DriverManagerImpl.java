@@ -1,5 +1,6 @@
 package uy.com.ces.capacitacion.automation.selenium;
 
+import java.time.Duration;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -7,14 +8,20 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.lang3.NotImplementedException;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-// import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.opera.OperaDriver;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import io.github.bonigarcia.wdm.DriverManagerType;
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -23,7 +30,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
  * @author Dardo De León
  */
 public class DriverManagerImpl implements DriverManager {
-
+	
 	private WebDriver driver;
 
 	private DriverManagerType driverType;
@@ -121,5 +128,42 @@ public class DriverManagerImpl implements DriverManager {
 		}
 
 		return result.get(0);
+	}
+
+	/**
+	 * La implementación actual, solicita al driver detener la ejecución a la espera
+	 * de que la página posea una URL igual al nombre de la clase
+	 */
+	@Override
+	public void stop(Duration duration) {
+		
+		try {
+			WebDriverWait wt = new WebDriverWait(driver, duration.toSeconds() - 1, 1);
+
+			wt.ignoring(NoSuchElementException.class);
+			
+			wt.until(ExpectedConditions.urlToBe(this.getClass().getName()));
+
+		} catch (TimeoutException e) {
+		}
+	}
+
+	@Override
+	public WebElement fluentWait(ExpectedCondition<WebElement> expected, Duration timeOut, Duration polling) {
+		
+		FluentWait<WebDriver> fw = new FluentWait<>(this.driver);
+		
+		fw.withTimeout(timeOut);
+		fw.pollingEvery(polling);
+		fw.ignoring(NoSuchElementException.class);
+		
+		return fw.until(expected);
+	}
+
+	@Override
+	public WebElement fluentWaitToBeClickable(WebElement element, Duration timeOut,
+			Duration pollingEvery) {
+
+		return this.fluentWait(ExpectedConditions.elementToBeClickable(element), timeOut, pollingEvery);
 	}
 }

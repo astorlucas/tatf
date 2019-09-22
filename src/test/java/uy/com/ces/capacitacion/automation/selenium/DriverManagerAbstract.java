@@ -20,6 +20,8 @@ import uy.com.ces.capacitacion.automation.RandomInjectResolver;
 })
 public abstract class DriverManagerAbstract {
 
+	public static final String PROP_BROWSER = "browser"; 
+	
 	public static DriverManager driverManager;
 
 	/**
@@ -34,6 +36,8 @@ public abstract class DriverManagerAbstract {
 	public static void setUp(DriverManager dm, @ConfigInject("web.driver.type") String type,
 			@ConfigInject("web.driver.timeout") Integer timeout) {
 
+		type = getBrowserBySystemProperty(PROP_BROWSER, type);
+		
 		driverManager = dm;
 
 		driverManager.setDriverType(type, timeout);
@@ -45,5 +49,15 @@ public abstract class DriverManagerAbstract {
 	@AfterEach
 	public void setDown() {
 		driverManager.destroyDriver();
+	}
+	
+	protected static String getBrowserBySystemProperty(String prop, String def)
+	{
+		String browserType = System.getProperty(prop);
+		if (browserType != null) {
+			def = browserType;
+		}
+		
+		return def;
 	}
 }

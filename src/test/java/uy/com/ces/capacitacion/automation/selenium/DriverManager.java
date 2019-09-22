@@ -1,8 +1,11 @@
 package uy.com.ces.capacitacion.automation.selenium;
 
+import java.time.Duration;
 import java.util.Set;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 
 /**
  * Interface del servicio que provee instancias de WebDriver
@@ -41,4 +44,27 @@ public interface DriverManager {
 	 *         dos, genera una excepción.
 	 */
 	String getPopHandle(String winHandle, Set<String> windowHandles) throws IllegalStateException;
+
+	/**
+	 * Detiene la ejecución, durante los segundos que se indiquen en {duration}
+	 * 
+	 * @param duration Tiempo durante el que se debe detener la ejecución
+	 */
+	void stop(Duration duration);
+
+	/**
+	 * @param expected Elemento que debe ser esperado
+	 * @param timeOutSelect Tiempo de espera
+	 * @param polling Tiempo mínimo de búsqueda del elemento
+	 * @return WebElement recuperado
+	 */
+	WebElement fluentWait(ExpectedCondition<WebElement> expected, Duration timeOut, Duration polling);
+
+	/**
+	 * @param selectType Elemento que debe ser esperado para realizar un click
+	 * @param timeOutSelect Tiempo de espera
+	 * @param polling Tiempo mínimo de búsqueda del elemento
+	 * @return WebElement recuperado
+	 */
+	WebElement fluentWaitToBeClickable(WebElement element, Duration timeOut, Duration polling);
 }
