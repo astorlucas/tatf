@@ -27,7 +27,7 @@ public class CarritoTest {
 		carrito.vaciar();
 	}
 
-	@Test
+	@org.junit.Test
 	public void testAgregarProductoExistente() {
 		long precio = 25;
 
@@ -96,7 +96,7 @@ public class CarritoTest {
 
 	/**
 	 * Busca verificar que el carrito no produce una reducción de cantidad de items,
-	 * cuando se llama el metodo agregarProducto con una cantidad negativa.
+	 * cuando se llama el método agregarProducto con una cantidad negativa.
 	 */
 	@Test
 	public void testReducirItemsAlAgregar() {

@@ -11,6 +11,7 @@ import java.util.stream.Stream;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -22,7 +23,7 @@ import uy.com.ces.capacitacion.uno.ValidCedulaImpl;
 /**
  * @author Dardo De León
  */
-class ValidCedulaImplTest {
+public class ValidCedulaImplTest {
 	private static final String NUM_END_0 = "1234567890";
 	private static final String NUM_END_9 = "1123456789";
 	private static final String NUM_END_8 = "9012345678";
@@ -58,6 +59,7 @@ class ValidCedulaImplTest {
 	 * Test method for
 	 * {@link uy.com.ces.capacitacion.uno.ValidCedulaImpl#valid(java.lang.String)}.
 	 */
+	@Tag("dev")
 	@ParameterizedTest
 	@ValueSource(strings = {
 			// valores válidos mínimos

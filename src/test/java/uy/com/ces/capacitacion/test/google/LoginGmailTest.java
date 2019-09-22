@@ -34,7 +34,7 @@ public class LoginGmailTest extends DriverManagerAbstract {
 	public void testLoginGmail(@ConfigInject("pagina.google.home.page") String homepage,
 			@ConfigInject("pagina.google.user.name") String userName,
 			@ConfigInject("pagina.google.user.pass") String userPass) {
-
+		
 		this.gm.goHome(homepage);
 
 		this.gm.login(userName, userPass);

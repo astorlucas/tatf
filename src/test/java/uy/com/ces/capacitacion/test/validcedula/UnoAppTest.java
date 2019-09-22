@@ -12,6 +12,7 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import uy.com.ces.capacitacion.uno.AppUno;
@@ -21,7 +22,7 @@ import uy.com.ces.capacitacion.uno.ValidCedulaImpl;
 /**
  * @author Dardo De León
  */
-class UnoAppTest {
+public class UnoAppTest {
 
 	public static final String CEDULA_OK = "70217948";
 	public static final String CEDULA_NOK = "81432153";
@@ -70,6 +71,7 @@ class UnoAppTest {
 		this.out = null;
 	}
 
+	@Tag("dev")
 	@Test
 	final void testCedulaOk() {
 		this.app.run(this.buildInput(CEDULA_OK), this.buildOutput(this.out));

@@ -86,7 +86,6 @@ public class EGroupwareProjectTest extends DriverManagerAbstract {
 
 	}
 
-	@Tag("dev")
 	@Test
 	public void testGetProject(@RandomInject(max = 15) String categoryName,
 			@RandomInject(max = 15) String categoryDescription,
@@ -126,7 +125,6 @@ public class EGroupwareProjectTest extends DriverManagerAbstract {
 				.contains(categoryName);
 	}
 
-	@Tag("dev")
 	@Test
 	public void testAddProjectResorce(@ConfigInject("pagina.egroupware.resource.name") String resourceMember,
 			@RandomInject(min = 1, max = 10) Integer resourceAvailibility,
@@ -164,20 +162,20 @@ public class EGroupwareProjectTest extends DriverManagerAbstract {
 		this.home = this.removeCategory(projects, categoryName);
 
 		assertThat(projectViewText)
-				.as("Verifica que la zona de miebros del proyecto, posee el identificador de miembro asignado.")
+				.as("Verifica que la zona de miembros del proyecto, posee el identificador de miembro asignado.")
 				.contains(resourceMember);
 	}
 
 	/**
-	 * Navega desde el dashboar al listado de categorias, crea una nuvea y retorna
-	 * el listado de categorias.
+	 * Navega desde el dashboard al listado de categorías, crea una nueva y retorna
+	 * el listado de categorías.
 	 * 
 	 * @param db                  Dashboard
-	 * @param categoryName        Nombre de categoria
-	 * @param categoryDescription Descripción de categoria
-	 * @param categoryType        Tipo de categoria
-	 * @param categoryColor       Color de categoria
-	 * @return Listado de categorias
+	 * @param categoryName        Nombre de categoría
+	 * @param categoryDescription Descripción de categoría
+	 * @param categoryType        Tipo de categoría
+	 * @param categoryColor       Color de categoría
+	 * @return Listado de categorías
 	 */
 	protected CategoryList prepareCategory(Dashboard db, String categoryName, String categoryDescription,
 			String categoryType, String categoryColor) {
@@ -192,12 +190,12 @@ public class EGroupwareProjectTest extends DriverManagerAbstract {
 	}
 
 	/**
-	 * Recibe el listado de proyectos, navega al listado de categorias, elimina la
+	 * Recibe el listado de proyectos, navega al listado de categorías, elimina la
 	 * categoría que coincide con el nombre recibido, la elimina, cierra la sessión
 	 * y retorna la pagina de inicio.
 	 * 
 	 * @param pj           Lista de proyectos
-	 * @param categoryName Nombre de la categoria que debe ser eliminada
+	 * @param categoryName Nombre de la categoría que debe ser eliminada
 	 * @return Pagina inicial del sitio
 	 */
 	protected Home removeCategory(ProjectList pj, String categoryName) {
@@ -212,13 +210,13 @@ public class EGroupwareProjectTest extends DriverManagerAbstract {
 	}
 
 	/**
-	 * Navega desde el listado de categorias al formulario de alta de proyectos,
+	 * Navega desde el listado de categorías al formulario de alta de proyectos,
 	 * crea uno nuevo y retorna el listado de proyectos.
 	 * 
-	 * @param ctg             Listado de categorias
+	 * @param ctg             Listado de categorías
 	 * @param projectNumber   Número del proyecto
 	 * @param projectName     Nombre del proyecto
-	 * @param categoryName    Categoria del proyecto
+	 * @param categoryName    Categoría del proyecto
 	 * @param projectPriority Prioridad del proyecto
 	 * @return Retorna la lista de proyectos
 	 */
