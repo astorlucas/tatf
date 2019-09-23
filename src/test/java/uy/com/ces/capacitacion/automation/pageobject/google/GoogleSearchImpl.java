@@ -1,5 +1,7 @@
 package uy.com.ces.capacitacion.automation.pageobject.google;
 
+import java.time.Duration;
+
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -13,6 +15,8 @@ public class GoogleSearchImpl extends GoogleAbstract implements GoogleSearch {
 
 	@FindBy(name = "q")
 	public WebElement inputQuestion;
+	
+	protected Duration waitPageLoading = Duration.ofSeconds(5);
 
 	public GoogleSearchImpl(DriverManager driverManager) {
 		super(driverManager);
@@ -26,6 +30,9 @@ public class GoogleSearchImpl extends GoogleAbstract implements GoogleSearch {
 	}
 
 	public String getTitle() {
+		
+		this.driverManager.stop(waitPageLoading);
+		
 		return this.driver.getTitle();
 	}
 }
