@@ -43,13 +43,3 @@ public interface PageObjectFactory {
 
 	ContactForm factoryEgroupwareContactoForm(DriverManager driverManager);
 }
-
-
-
-
-
-
-
-
-
-

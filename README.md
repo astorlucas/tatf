@@ -65,6 +65,8 @@ git mergetool
 
 ```
 git add {file-name|.}
+git reset
+git stash
 ```
 
 ### Respository
