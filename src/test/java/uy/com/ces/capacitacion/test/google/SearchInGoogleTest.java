@@ -9,10 +9,10 @@ import org.junit.jupiter.api.Test;
 import uy.com.ces.capacitacion.automation.ConfigInject;
 import uy.com.ces.capacitacion.automation.ConfigInjectResources;
 import uy.com.ces.capacitacion.automation.DependencyInject;
-import uy.com.ces.capacitacion.automation.pageobject.PageObjectFactory;
-import uy.com.ces.capacitacion.automation.pageobject.PageObjectFactoryImpl;
-import uy.com.ces.capacitacion.automation.pageobject.google.GoogleSearch;
 import uy.com.ces.capacitacion.automation.selenium.DriverManagerAbstract;
+import uy.com.ces.capacitacion.pageobject.PageObjectFactory;
+import uy.com.ces.capacitacion.pageobject.PageObjectFactoryImpl;
+import uy.com.ces.capacitacion.pageobject.google.GoogleSearch;
 
 /**
  * @author Dardo De León

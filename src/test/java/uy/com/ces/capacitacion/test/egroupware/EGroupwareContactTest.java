@@ -10,13 +10,13 @@ import uy.com.ces.capacitacion.automation.ConfigInject;
 import uy.com.ces.capacitacion.automation.ConfigInjectResources;
 import uy.com.ces.capacitacion.automation.DependencyInject;
 import uy.com.ces.capacitacion.automation.RandomInject;
-import uy.com.ces.capacitacion.automation.pageobject.PageObjectFactory;
-import uy.com.ces.capacitacion.automation.pageobject.PageObjectFactoryImpl;
-import uy.com.ces.capacitacion.automation.pageobject.egroupware.ContactForm;
-import uy.com.ces.capacitacion.automation.pageobject.egroupware.ContactList;
-import uy.com.ces.capacitacion.automation.pageobject.egroupware.Dashboard;
-import uy.com.ces.capacitacion.automation.pageobject.egroupware.Home;
 import uy.com.ces.capacitacion.automation.selenium.DriverManagerAbstract;
+import uy.com.ces.capacitacion.pageobject.PageObjectFactory;
+import uy.com.ces.capacitacion.pageobject.PageObjectFactoryImpl;
+import uy.com.ces.capacitacion.pageobject.egroupware.ContactForm;
+import uy.com.ces.capacitacion.pageobject.egroupware.ContactList;
+import uy.com.ces.capacitacion.pageobject.egroupware.Dashboard;
+import uy.com.ces.capacitacion.pageobject.egroupware.Home;
 
 /**
  * @author Dardo De León

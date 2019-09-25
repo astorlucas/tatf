@@ -8,10 +8,10 @@ import org.junit.jupiter.api.Test;
 import uy.com.ces.capacitacion.automation.ConfigInject;
 import uy.com.ces.capacitacion.automation.ConfigInjectResources;
 import uy.com.ces.capacitacion.automation.DependencyInject;
-import uy.com.ces.capacitacion.automation.pageobject.PageObjectFactory;
-import uy.com.ces.capacitacion.automation.pageobject.PageObjectFactoryImpl;
-import uy.com.ces.capacitacion.automation.pageobject.google.GoogleGmail;
 import uy.com.ces.capacitacion.automation.selenium.DriverManagerAbstract;
+import uy.com.ces.capacitacion.pageobject.PageObjectFactory;
+import uy.com.ces.capacitacion.pageobject.PageObjectFactoryImpl;
+import uy.com.ces.capacitacion.pageobject.google.GoogleGmail;
 
 /**
  * @author Dardo De León

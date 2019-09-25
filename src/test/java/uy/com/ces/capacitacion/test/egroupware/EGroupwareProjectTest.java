@@ -10,16 +10,16 @@ import uy.com.ces.capacitacion.automation.ConfigInject;
 import uy.com.ces.capacitacion.automation.ConfigInjectResources;
 import uy.com.ces.capacitacion.automation.DependencyInject;
 import uy.com.ces.capacitacion.automation.RandomInject;
-import uy.com.ces.capacitacion.automation.pageobject.PageObjectFactory;
-import uy.com.ces.capacitacion.automation.pageobject.PageObjectFactoryImpl;
-import uy.com.ces.capacitacion.automation.pageobject.egroupware.CategoryForm;
-import uy.com.ces.capacitacion.automation.pageobject.egroupware.CategoryList;
-import uy.com.ces.capacitacion.automation.pageobject.egroupware.Dashboard;
-import uy.com.ces.capacitacion.automation.pageobject.egroupware.Home;
-import uy.com.ces.capacitacion.automation.pageobject.egroupware.ProjectForm;
-import uy.com.ces.capacitacion.automation.pageobject.egroupware.ProjectList;
-import uy.com.ces.capacitacion.automation.pageobject.egroupware.ProjectView;
 import uy.com.ces.capacitacion.automation.selenium.DriverManagerAbstract;
+import uy.com.ces.capacitacion.pageobject.PageObjectFactory;
+import uy.com.ces.capacitacion.pageobject.PageObjectFactoryImpl;
+import uy.com.ces.capacitacion.pageobject.egroupware.CategoryForm;
+import uy.com.ces.capacitacion.pageobject.egroupware.CategoryList;
+import uy.com.ces.capacitacion.pageobject.egroupware.Dashboard;
+import uy.com.ces.capacitacion.pageobject.egroupware.Home;
+import uy.com.ces.capacitacion.pageobject.egroupware.ProjectForm;
+import uy.com.ces.capacitacion.pageobject.egroupware.ProjectList;
+import uy.com.ces.capacitacion.pageobject.egroupware.ProjectView;
 
 /**
  * @author Dardo De León
