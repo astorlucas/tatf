@@ -62,7 +62,7 @@ dependencies {
 
 	// librería que aporta útilidades de lenguaje Java 
 	compile 'org.apache.commons:commons-lang3:3.9'
-    
+
 }
 
 application {
@@ -77,7 +77,20 @@ jar {
         }
     }
     manifest {
-        attributes 'Main-Class': 'uy.com.ces.capacitacion.suites.runner.SuiteRunner'
+        attributes (
+        	'Main-Class'		: 'uy.com.ces.capacitacion.suites.runner.SuiteRunner',
+
+            'Build-Timestamp'	: new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S").format(new Date()),
+            'Build-JDK'      	: "${System.properties['java.version']} (${System.properties['java.vendor']} ${System.properties['java.vm.version']})",
+            'Build-OS'       	: "${System.properties['os.name']} ${System.properties['os.arch']} ${System.properties['os.version']}",
+
+            'Project-Title'		: project.name,
+            'Project-Version'	: project.version.replace('unspecified', '0.0.'.concat(new java.text.SimpleDateFormat("yyyyMMdd").format(new Date()))),
+            
+            'JUnit-Version' 	: project.configurations.compile.dependencies.findAll({it.name.contains("junit-jupiter-api")}).inject([]) { result, entry -> result << entry.version }.join(''), 
+            
+            'Selenium-Version'	: project.configurations.compile.dependencies.findAll({it.name.contains("selenium-api")}).inject([]) { result, entry -> result << entry.version }.join('')
+        )
     }
 }
 
@@ -90,7 +103,9 @@ jacocoTestReport {
 }
 
 test {
-	useJUnitPlatform()
+	useJUnitPlatform {}
+	
+	maxParallelForks 4
 }
 
 task buildTestReports(type: GradleBuild) {
@@ -115,4 +130,3 @@ sourceSets {
 		}
 	}
 }
-

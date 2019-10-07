@@ -7,6 +7,8 @@ public interface ContactList {
 	ContactForm newContacto();
 
 	ContactList findContacto(String namePrefix);
+
+	ContactView viewContacto(String nameFamily);
 	
 	ContactList delContacto(String nameFamily);
 

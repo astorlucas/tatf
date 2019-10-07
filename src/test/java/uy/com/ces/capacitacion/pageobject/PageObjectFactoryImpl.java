@@ -9,6 +9,7 @@ import uy.com.ces.capacitacion.pageobject.egroupware.ContactForm;
 import uy.com.ces.capacitacion.pageobject.egroupware.ContactFormImpl;
 import uy.com.ces.capacitacion.pageobject.egroupware.ContactList;
 import uy.com.ces.capacitacion.pageobject.egroupware.ContactListImpl;
+import uy.com.ces.capacitacion.pageobject.egroupware.ContactViewImpl;
 import uy.com.ces.capacitacion.pageobject.egroupware.Dashboard;
 import uy.com.ces.capacitacion.pageobject.egroupware.DashboardImpl;
 import uy.com.ces.capacitacion.pageobject.egroupware.Home;
@@ -21,6 +22,7 @@ import uy.com.ces.capacitacion.pageobject.egroupware.ProjectList;
 import uy.com.ces.capacitacion.pageobject.egroupware.ProjectListImpl;
 import uy.com.ces.capacitacion.pageobject.egroupware.ProjectView;
 import uy.com.ces.capacitacion.pageobject.egroupware.ProjectViewImpl;
+import uy.com.ces.capacitacion.pageobject.egroupware.ContactView;
 import uy.com.ces.capacitacion.pageobject.google.GoogleGmail;
 import uy.com.ces.capacitacion.pageobject.google.GoogleGmailImpl;
 import uy.com.ces.capacitacion.pageobject.google.GoogleSearch;
@@ -106,5 +108,10 @@ public class PageObjectFactoryImpl implements PageObjectFactory {
 	@Override
 	public ContactForm factoryEgroupwareContactoForm(DriverManager driverManager) {
 		return driverManager.factoryElements(new ContactFormImpl(driverManager, this));
+	}
+
+	@Override
+	public ContactView factoryEgroupwareContactoView(DriverManager driverManager) {
+		return driverManager.factoryElements(new ContactViewImpl(driverManager, this));
 	}
 }

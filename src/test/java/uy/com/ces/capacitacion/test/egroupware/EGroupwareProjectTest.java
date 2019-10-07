@@ -69,6 +69,13 @@ public class EGroupwareProjectTest extends DriverManagerAbstract {
 		projects = project.createProject(projectNumber, projectName, categoryName, projectPriority);
 
 		String textMainForm = projects.getTextMainForm();
+		
+		// getProject
+		ProjectView projectView = projects.viewProject(projectName);
+
+		String projectViewText = projectView.getViewText();
+		
+		projects = projectView.goProjects();
 
 		// delProject
 		projects.delProject(projectName);
@@ -76,6 +83,7 @@ public class EGroupwareProjectTest extends DriverManagerAbstract {
 		// setDown
 		this.home = this.removeCategory(projects, categoryName);
 
+		// valida que el proyecto fue creado
 		assertThat(textMainForm)
 				.as("Verifica que el nombre del proyecto, se encuentre en el contenedor principal.")
 				.contains(projectName);
@@ -83,7 +91,17 @@ public class EGroupwareProjectTest extends DriverManagerAbstract {
 		assertThat(textMainForm)
 				.as("Verifica que el mensaje de proyecto creado, se encuentra en el contenedor principal.")
 				.contains(project.getMessageSaved());
-
+		
+		// valida que el proyecto se creó con los datos esperados
+		assertThat(projectViewText)
+				.as("Verifica que la vista del proyecto, posee el número asociado al proyecto buscado.")
+				.contains(projectNumber);
+		assertThat(projectViewText)
+				.as("Verifica que la vista del proyecto, posee la nombre asociado al proyecto buscado.")
+				.contains(projectName);
+		assertThat(projectViewText)
+				.as("Verifica que la vista del proyecto, posee la categoría asociada al proyecto buscado.")
+				.contains(categoryName);
 	}
 
 	@Test

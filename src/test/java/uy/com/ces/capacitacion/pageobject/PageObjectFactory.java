@@ -10,6 +10,7 @@ import uy.com.ces.capacitacion.pageobject.egroupware.Home;
 import uy.com.ces.capacitacion.pageobject.egroupware.ProjectForm;
 import uy.com.ces.capacitacion.pageobject.egroupware.ProjectList;
 import uy.com.ces.capacitacion.pageobject.egroupware.ProjectView;
+import uy.com.ces.capacitacion.pageobject.egroupware.ContactView;
 import uy.com.ces.capacitacion.pageobject.google.GoogleGmail;
 import uy.com.ces.capacitacion.pageobject.google.GoogleSearch;
 import uy.com.ces.capacitacion.pageobject.moodle.CesCapacitacion;
@@ -42,4 +43,6 @@ public interface PageObjectFactory {
 	ContactList factoryEgroupwareContactoList(DriverManager driverManager);
 
 	ContactForm factoryEgroupwareContactoForm(DriverManager driverManager);
+
+	ContactView factoryEgroupwareContactoView(DriverManager driverManager);
 }

@@ -30,7 +30,11 @@ public class ContactListImpl implements ContactList {
 
 	protected Duration waitPageLoading = Duration.ofSeconds(6);
 
-	protected String title = "eGroupWare [Addressbook]";
+	/**
+	 * Original: `eGroupWare [Addressbook]`
+	 * Actual: para ser compatible con `eGroupWare [Addressbook - Search for 'BUSCADO']` 
+	 */
+	protected String title = "eGroupWare [Addressbook";
 
 	public ContactListImpl(MainMenu mm, DriverManager dm, PageObjectFactory pof) {
 
@@ -48,7 +52,7 @@ public class ContactListImpl implements ContactList {
 
 	@Override
 	public boolean validPage() {
-		return this.driver.getTitle().equalsIgnoreCase(this.title);
+		return this.driver.getTitle().startsWith(this.title);
 	}
 
 	@Override
@@ -88,6 +92,16 @@ public class ContactListImpl implements ContactList {
 		
 		return this;
 	}
+
+	@Override
+	public ContactView viewContacto(String nameFamily) {
+
+		String xPathViewContacto = "//*[@id=\"divAppbox\"]//span[contains(text(), \"" + nameFamily + "\")]/../../../../../../td[6]//img[@title=\"View\"]";
+		
+		this.driver.findElement(By.xpath(xPathViewContacto)).click();
+		
+		return this.pageObjectFactory.factoryEgroupwareContactoView(this.driverManager);
+	}
 	
 	@Override
 	public Home logout() {
@@ -96,4 +110,5 @@ public class ContactListImpl implements ContactList {
 
 		return this.pageObjectFactory.factoryEgroupwareHome(this.driverManager);
 	}
+
 }

@@ -8,9 +8,8 @@ import org.junit.runner.RunWith;
 @UseTechnicalNames
 @RunWith(JUnitPlatform.class)
 @SelectPackages({
-	"uy.com.ces.capacitacion.test.moodle", 
-	"uy.com.ces.capacitacion.test.egroupware"
+	"uy.com.ces.capacitacion.test.moodle"
 })
-public class CesSuite {
+public class CesMoodleSuite {
 
 }

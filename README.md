@@ -30,6 +30,12 @@ El objetivo de esta tarea es poder ejecutar solo las pruebas que se están desarr
 gradle testDev
 ```
 
+### Gradle
+
+```
+./gradlew build --refresh-dependencies
+```
+
 ### Acceso a servicios
 
 Las pruebas que requieren acceso a servicios, necesitan recibir desde configuración, las credenciales necesarias para ingresar a ellos.

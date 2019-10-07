@@ -3,7 +3,6 @@ package uy.com.ces.capacitacion.test.google;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import uy.com.ces.capacitacion.automation.ConfigInject;
@@ -31,7 +30,6 @@ public class SearchInGoogleTest extends DriverManagerAbstract {
 		this.gs = pageObjectFactory.factoryGoogleSearch(driverManager);
 	}
 
-	@Tag("dev")
 	@Test
 	public void testSearchTextGoogle(@ConfigInject("pagina.google.home.page") String homepage,
 			@ConfigInject("pagina.google.buscar.texto") String text) {
