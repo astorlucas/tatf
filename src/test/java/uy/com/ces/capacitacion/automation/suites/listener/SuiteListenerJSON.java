@@ -68,7 +68,7 @@ public class SuiteListenerJSON extends RunListener implements SuiteListener {
 	@Override
 	public void testFailure(Failure failure) throws Exception {
 		// failure.getException()
-		this.currentTest.addProperty("failure", failure.getDescription().toString());
+		this.currentTest.addProperty("failure", failure.getMessage());
 	}
 
 	/**
@@ -92,6 +92,7 @@ public class SuiteListenerJSON extends RunListener implements SuiteListener {
 
 		this.currentSuites.add(element);
 
+		this.currentTests = null;
 	}
 
 	@Override
