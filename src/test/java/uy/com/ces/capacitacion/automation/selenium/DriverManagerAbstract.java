@@ -22,7 +22,7 @@ public abstract class DriverManagerAbstract {
 
 	public static final String PROP_BROWSER = "browser"; 
 	
-	public static DriverManager driverManager;
+	protected static DriverManager driverManager;
 
 	/**
 	 * Asigna la factoría WebDriver y el tipo de WebDriver que se usará en las
@@ -36,7 +36,7 @@ public abstract class DriverManagerAbstract {
 	public static void setUp(DriverManager dm, @ConfigInject("web.driver.type") String type,
 			@ConfigInject("web.driver.timeout") Integer timeout) {
 
-		type = getBrowserBySystemProperty(PROP_BROWSER, type);
+		type = System.getProperty(PROP_BROWSER, type);
 		
 		driverManager = dm;
 
@@ -49,15 +49,5 @@ public abstract class DriverManagerAbstract {
 	@AfterEach
 	public void setDown() {
 		driverManager.destroyDriver();
-	}
-	
-	protected static String getBrowserBySystemProperty(String prop, String def)
-	{
-		String browserType = System.getProperty(prop);
-		if (browserType != null) {
-			def = browserType;
-		}
-		
-		return def;
 	}
 }

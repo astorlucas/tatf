@@ -8,6 +8,7 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.lang3.NotImplementedException;
+import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -17,6 +18,7 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.opera.OperaDriver;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -50,6 +52,7 @@ public class DriverManagerImpl implements DriverManager {
 	public WebDriver factoryDriver() {
 
 		if (this.driver == null) {
+			
 			switch (this.driverType) {
 			case CHROME:
 				this.driver = new ChromeDriver();
@@ -79,6 +82,12 @@ public class DriverManagerImpl implements DriverManager {
 			if (this.timeout > 0) {
 				this.driver.manage().timeouts().implicitlyWait(this.timeout, TimeUnit.SECONDS);
 			}
+			
+			if (this.driver instanceof RemoteWebDriver) {
+				Capabilities capabilities = ((RemoteWebDriver) this.driver).getCapabilities();
+				System.setProperty("driver.manager.current.browser",
+						capabilities.getBrowserName() + " " + capabilities.getVersion());
+			}		
 		}
 
 		return this.driver;

@@ -1,4 +1,4 @@
-package uy.com.ces.capacitacion.suites.listener;
+package uy.com.ces.capacitacion.automation.suites.listener;
 
 import java.io.PrintStream;
 
@@ -7,7 +7,12 @@ import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
 import org.junit.runner.notification.RunListener;
 
-public class SuiteListener extends RunListener {
+import uy.com.ces.capacitacion.automation.suites.context.SuiteContext;
+
+/**
+ * @author Dardo De León
+ */
+public class SuiteListenerPrintStream extends RunListener implements SuiteListener {
 
 	protected static String newLine = "\n";
 
@@ -15,21 +20,10 @@ public class SuiteListener extends RunListener {
 
 	protected String resume = "";
 
-	protected final PrintStream out;
+	protected PrintStream out;
 
-	public SuiteListener(PrintStream o) {
+	public SuiteListenerPrintStream(SuiteContext c, PrintStream o) {
 		this.out = o;
-	}
-
-	/**
-	 * Asigna el nombre de la suite que se está ejecutando
-	 * 
-	 * @param Nombre de la suite
-	 */
-	public void setSuite(String s) {
-		this.suite = s;
-
-		print("[Start suite] %s", this.suite);
 	}
 
 	/**
@@ -73,13 +67,23 @@ public class SuiteListener extends RunListener {
 		
 		print("[Result suite] %s - %s", this.suite, finish);
 	}
+	
+	@Override
+	public void setSuite(String s) {
+		this.suite = s;
 
-	/**
-	 * Imprime el resumen de la ejecución
-	 */
+		print("[Start suite] %s", this.suite);
+	}
+
+	@Override
 	public void showResume() {
 		this.print("%s-------------------------------%s RESUMEN%s-------------------------------%s%s%s", 
 				newLine, newLine, newLine, newLine, this.resume, newLine);
+	}
+
+	@Override
+	public void saveResume() {
+		this.showResume();
 	}
 
 	/**
